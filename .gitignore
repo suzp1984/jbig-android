@@ -1,3 +1,4 @@
+
 # Built application files
 *.apk
 *.ap_
@@ -25,3 +26,12 @@ proguard/
 
 # Log Files
 *.log
+
+.gradle
+.DS_Store
+
+/captures
+*.iml
+*~
+.idea/
+

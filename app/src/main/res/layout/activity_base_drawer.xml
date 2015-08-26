@@ -5,6 +5,7 @@
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         tools:context="lib.jacob.org.jbigandroid.BaseDrawerActivity">
 
     <FrameLayout
@@ -21,7 +22,10 @@
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             android:background="@color/white"
-            app:itemTextColor="@color/dark"
+            app:elevation="10dp"
+            app:insetForeground="@color/black"
+            app:itemIconTint="@color/black"
+            app:itemTextColor="@color/black"
             app:headerLayout="@layout/nav_header"
             app:menu="@menu/drawer_view"
             />

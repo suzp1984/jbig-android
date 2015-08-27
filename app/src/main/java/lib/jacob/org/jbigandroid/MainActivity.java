@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import butterknife.Bind;
+import lib.jacob.org.jbigandroid.adapter.FragmentViewAdapter;
 
 public class MainActivity extends BaseDrawerActivity {
 
@@ -38,6 +39,9 @@ public class MainActivity extends BaseDrawerActivity {
                 }
             });
         }
+
+        mViewPager.setAdapter(new FragmentViewAdapter(getSupportFragmentManager()));
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override

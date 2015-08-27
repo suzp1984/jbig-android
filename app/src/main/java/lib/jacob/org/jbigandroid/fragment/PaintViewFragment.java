@@ -1,8 +1,10 @@
 package lib.jacob.org.jbigandroid.fragment;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,8 +15,12 @@ import android.widget.FrameLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import lib.jacob.org.jbigandroid.R;
+import lib.jacob.org.jbigandroid.utils.ByteUtils;
 import lib.jacob.org.jbigandroid.widget.PaintView;
+import lib.jacob.org.lib.JbigCodec;
+import lib.jacob.org.lib.JbigCodecFactory;
 
 public class PaintViewFragment extends Fragment {
 
@@ -108,5 +114,22 @@ public class PaintViewFragment extends Fragment {
         ButterKnife.unbind(this);
 
         super.onDestroyView();
+    }
+
+    @OnClick(R.id.button)
+    public void onEncodeClicked() {
+        Bitmap bitmap = mPaintView.getCachebBitmap();
+
+        Bitmap[] bitmaps = new Bitmap[1];
+        bitmaps[0] = bitmap;
+
+        JbigCodec jbigCodec = JbigCodecFactory.getJbigCodec(JbigCodecFactory.CODEC.JNI_CODEC);
+
+        if (jbigCodec != null) {
+            byte[] jbigData = jbigCodec.encode(bitmaps);
+
+            String serializedJbig = ByteUtils.byteArray2HexString(jbigData);
+            Log.e("Encode", serializedJbig);
+        }
     }
 }

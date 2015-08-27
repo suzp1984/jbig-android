@@ -118,6 +118,7 @@ public class PaintViewFragment extends Fragment {
 
     @OnClick(R.id.button)
     public void onEncodeClicked() {
+        //TODO:XXX pop up a dialog, clean the PaintView.
         Bitmap bitmap = mPaintView.getCachebBitmap();
 
         Bitmap[] bitmaps = new Bitmap[1];

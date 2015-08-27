@@ -76,7 +76,7 @@ public class PaintView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        Log.e("PaintView", event.toString());
+        // Log.e("PaintView", event.toString());
 
         float x = event.getX();
         float y = event.getY();

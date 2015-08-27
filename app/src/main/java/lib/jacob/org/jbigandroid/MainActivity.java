@@ -1,10 +1,10 @@
 package lib.jacob.org.jbigandroid;
 
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,12 +12,12 @@ import android.view.View;
 
 import butterknife.Bind;
 import lib.jacob.org.jbigandroid.adapter.FragmentViewAdapter;
-import lib.jacob.org.jbigandroid.widget.UnScrollingViewPager;
+import lib.jacob.org.jbigandroid.widget.SwipeControlViewPager;
 
 public class MainActivity extends BaseDrawerActivity {
 
     @Bind(R.id.viewpager)
-    UnScrollingViewPager mViewPager;
+    SwipeControlViewPager mViewPager;
 
     @Bind(R.id.tabs)
     TabLayout mTabLayout;
@@ -43,7 +43,56 @@ public class MainActivity extends BaseDrawerActivity {
 
         mViewPager.setAdapter(new FragmentViewAdapter(getSupportFragmentManager()));
         mTabLayout.setupWithViewPager(mViewPager);
-        // mViewPager.requestDisallowInterceptTouchEvent(false);
+        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Log.e("TAG", "Tabe seleted " + tab.getPosition());
+
+                if (tab.getPosition() == 0) {
+                    mViewPager.setSwipeable(false);
+                } else {
+                    mViewPager.setSwipeable(true);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset,
+                    int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Log.e("TAG", "Page seleted = " + position);
+
+                if (position == 0) {
+                    mViewPager.setSwipeable(false);
+                } else {
+                    mViewPager.setSwipeable(true);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        if (mTabLayout.getSelectedTabPosition() == 0) {
+            mViewPager.setSwipeable(false);
+        }
     }
 
     @Override

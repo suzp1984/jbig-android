@@ -18,15 +18,10 @@ import lib.jacob.org.jbigandroid.widget.PaintView;
 
 public class PaintViewFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
-
     private String mParam2;
 
     private PaintView mPaintView;
@@ -75,6 +70,7 @@ public class PaintViewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_paint_view, container, false);
         ButterKnife.bind(this, view);
 
+        mButton.setEnabled(false);
         mPaintView = new PaintView(getActivity());
         AbsListView.LayoutParams params = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
@@ -83,6 +79,10 @@ public class PaintViewFragment extends Fragment {
         mPaintView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    mButton.setEnabled(true);
+                }
+
                 return false;
             }
         });

@@ -18,6 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/button"
+            android:focusable="false"
+            android:touchscreenBlocksFocus="false"
+            android:focusableInTouchMode="false"
+            android:filterTouchesWhenObscured="false"
+
             >
 
     </FrameLayout>

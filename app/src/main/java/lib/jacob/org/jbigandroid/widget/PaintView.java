@@ -75,35 +75,34 @@ public class PaintView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (isEnabled()) {
 
-            float x = event.getX();
-            float y = event.getY();
+        Log.e("PaintView", event.toString());
 
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN: {
-                    touch_start(x, y);
-                    invalidate();
-                    break;
-                }
+        float x = event.getX();
+        float y = event.getY();
 
-                case MotionEvent.ACTION_MOVE: {
-                    touch_move(x, y);
-                    invalidate();
-                    break;
-                }
-
-                case MotionEvent.ACTION_UP: {
-                   touch_up();
-                    invalidate();
-                    break;
-                }
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN: {
+                touch_start(x, y);
+                invalidate();
+                break;
             }
 
-            return true;
-        } else {
-            return false;
+            case MotionEvent.ACTION_MOVE: {
+                touch_move(x, y);
+                invalidate();
+                break;
+            }
+
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL: {
+                touch_up();
+                invalidate();
+                break;
+            }
         }
+
+        return true;
     }
 
     private void touch_start(float x, float y) {

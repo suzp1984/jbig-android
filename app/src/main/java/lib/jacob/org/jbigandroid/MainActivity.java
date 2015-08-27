@@ -12,11 +12,12 @@ import android.view.View;
 
 import butterknife.Bind;
 import lib.jacob.org.jbigandroid.adapter.FragmentViewAdapter;
+import lib.jacob.org.jbigandroid.widget.UnScrollingViewPager;
 
 public class MainActivity extends BaseDrawerActivity {
 
     @Bind(R.id.viewpager)
-    ViewPager mViewPager;
+    UnScrollingViewPager mViewPager;
 
     @Bind(R.id.tabs)
     TabLayout mTabLayout;
@@ -42,6 +43,7 @@ public class MainActivity extends BaseDrawerActivity {
 
         mViewPager.setAdapter(new FragmentViewAdapter(getSupportFragmentManager()));
         mTabLayout.setupWithViewPager(mViewPager);
+        // mViewPager.requestDisallowInterceptTouchEvent(false);
     }
 
     @Override

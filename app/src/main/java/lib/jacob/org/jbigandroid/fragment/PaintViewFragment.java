@@ -1,14 +1,20 @@
 package lib.jacob.org.jbigandroid.fragment;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.Button;
+import android.widget.FrameLayout;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import lib.jacob.org.jbigandroid.R;
+import lib.jacob.org.jbigandroid.widget.PaintView;
 
 public class PaintViewFragment extends Fragment {
 
@@ -22,6 +28,14 @@ public class PaintViewFragment extends Fragment {
     private String mParam1;
 
     private String mParam2;
+
+    private PaintView mPaintView;
+
+    @Bind(R.id.button)
+    Button mButton;
+
+    @Bind(R.id.paint_content)
+    FrameLayout mFrameLayout;
 
     /**
      * Use this factory method to create a new instance of
@@ -58,7 +72,24 @@ public class PaintViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_paint_view, container, false);
+        View view = inflater.inflate(R.layout.fragment_paint_view, container, false);
+        ButterKnife.bind(this, view);
+
+        mPaintView = new PaintView(getActivity());
+        AbsListView.LayoutParams params = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        mPaintView.setLayoutParams(params);
+        mPaintView.requestFocus();
+        mPaintView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        });
+
+        mFrameLayout.addView(mPaintView);
+
+        return view;
     }
 
     @Override
@@ -70,5 +101,12 @@ public class PaintViewFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public void onDestroyView() {
+        ButterKnife.unbind(this);
+
+        super.onDestroyView();
     }
 }

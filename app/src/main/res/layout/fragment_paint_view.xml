@@ -14,7 +14,7 @@
 
 
     <FrameLayout
-            android:id="@+id/pain_content"
+            android:id="@+id/paint_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/button"

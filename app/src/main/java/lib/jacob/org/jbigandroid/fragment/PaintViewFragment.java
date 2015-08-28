@@ -16,7 +16,9 @@ import android.widget.FrameLayout;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.Realm;
 import lib.jacob.org.jbigandroid.R;
+import lib.jacob.org.jbigandroid.realmobj.JbigItem;
 import lib.jacob.org.jbigandroid.utils.ByteUtils;
 import lib.jacob.org.jbigandroid.widget.PaintView;
 import lib.jacob.org.lib.JbigCodec;
@@ -128,6 +130,15 @@ public class PaintViewFragment extends Fragment {
 
         if (jbigCodec != null) {
             byte[] jbigData = jbigCodec.encode(bitmaps);
+
+            Realm realm = Realm.getInstance(getActivity());
+            realm.beginTransaction();
+
+            JbigItem item = realm.createObject(JbigItem.class);
+            item.setTag("PaintView");
+            item.setJbig(jbigData);
+
+            realm.commitTransaction();
 
             String serializedJbig = ByteUtils.byteArray2HexString(jbigData);
             Log.e("Encode", serializedJbig);

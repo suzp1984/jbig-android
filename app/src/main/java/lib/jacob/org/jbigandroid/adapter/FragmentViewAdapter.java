@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import lib.jacob.org.jbigandroid.fragment.DecoderFragment;
 import lib.jacob.org.jbigandroid.fragment.PaintViewFragment;
 
 /**
@@ -17,11 +18,14 @@ public class FragmentViewAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment= null;
+        Fragment fragment = null;
 
         switch (position) {
             case 0:
                 fragment = PaintViewFragment.newInstance(null, null);
+                break;
+            case 1:
+                fragment = DecoderFragment.newInstance();
                 break;
             default:
                 break;
@@ -32,7 +36,7 @@ public class FragmentViewAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 1;
+        return 2;
     }
 
     @Override
@@ -42,6 +46,9 @@ public class FragmentViewAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 title = "Paint";
+                break;
+            case 1:
+                title = "Decoder";
                 break;
             default:
                 title = null;

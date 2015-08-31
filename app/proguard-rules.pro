@@ -34,3 +34,10 @@
 -keep @io.realm.annotations.RealmModule class *
 -dontwarn javax.**
 -dontwarn io.realm.**
+
+# square otto event bus
+-keepattributes *Annotation*
+-keepclassmembers class ** {
+    @com.squareup.otto.Subscribe public *;
+    @com.squareup.otto.Produce public *;
+}

@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 
 import com.squareup.otto.Bus;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -12,6 +14,7 @@ import java.util.List;
 public final class ApplicationState implements BaseState, JbigDbState {
 
     private final Bus mEventBus;
+    private final List<byte[]> mJbigList = new ArrayList<>();
 
     public ApplicationState(Bus eventBus) {
         mEventBus = Preconditions.checkNotNull(eventBus, "EventBus cannot be null");
@@ -19,12 +22,22 @@ public final class ApplicationState implements BaseState, JbigDbState {
 
     @Override
     public List<byte[]> getJbigDbs() {
-        return null;
+        return mJbigList;
     }
 
     @Override
     public byte[] getJbigAtPosition(int position) {
-        return new byte[0];
+        return mJbigList.get(position);
+    }
+
+    @Override
+    public void putJbig(byte[] jbig) {
+        mJbigList.add(jbig);
+    }
+
+    @Override
+    public void putJbigs(Collection<byte[]> jbigs) {
+        mJbigList.addAll(jbigs);
     }
 
     @Override

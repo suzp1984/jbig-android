@@ -7,6 +7,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import lib.jacob.org.jbigandroid.modules.ContextProvider;
 import lib.jacob.org.jbigandroid.modules.InjectorProvider;
+import lib.jacob.org.jbigandroid.modules.PersistenceProvider;
 import lib.jacob.org.jbigandroid.modules.StateProvider;
 import lib.jacob.org.jbigandroid.modules.UtilsProvider;
 import lib.jacob.org.jbigandroid.utils.Injector;
@@ -28,7 +29,8 @@ public class JbigApplication extends Application implements Injector {
         mObjectGraph = ObjectGraph.create(new ContextProvider(this),
                 new InjectorProvider(this),
                 new UtilsProvider(this),
-                new StateProvider());
+                new StateProvider(),
+                new PersistenceProvider());
 
         mObjectGraph.inject(this);
     }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +26,8 @@ import lib.jacob.org.jbigandroid.widget.PaintView;
 import lib.jacob.org.lib.JbigCodec;
 import lib.jacob.org.lib.JbigCodecFactory;
 
-public class PaintViewFragment extends Fragment {
+public class PaintViewFragment extends Fragment implements
+        EncoderDialogFragment.EncodeDialogListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -125,6 +127,34 @@ public class PaintViewFragment extends Fragment {
     @OnClick(R.id.encoder)
     public void onEncodeClicked() {
         //TODO:XXX pop up a dialog, clean the PaintView.
+
+        showEncodeDialog();
+    }
+
+    @OnClick(R.id.clear)
+    public void onClearBtnClicked() {
+        mPaintView.clear();
+        mEncodeBtn.setEnabled(false);
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        encodeAndSave();
+        onClearBtnClicked();
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        Log.e("TAG", "onDialog Negative Clicked");
+    }
+
+    private void showEncodeDialog() {
+        EncoderDialogFragment dialogFragment = new EncoderDialogFragment();
+        dialogFragment.setEncodeDialogListener(this);
+        dialogFragment.show(getChildFragmentManager(), "encode");
+    }
+
+    private void encodeAndSave() {
         Bitmap bitmap = mPaintView.getCachebBitmap();
 
         Bitmap[] bitmaps = new Bitmap[1];
@@ -147,11 +177,5 @@ public class PaintViewFragment extends Fragment {
             String serializedJbig = ByteUtils.byteArray2HexString(jbigData);
             Log.e("Encode", serializedJbig);
         }
-    }
-
-    @OnClick(R.id.clear)
-    public void onClearBtnClicked() {
-        mPaintView.clear();
-        mEncodeBtn.setEnabled(false);
     }
 }

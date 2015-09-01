@@ -6,4 +6,7 @@ package lib.jacob.org.jbigandroid.display;
 public interface IDisplay {
     void showPaintUi();
     void showDecoderUi();
+
+    void showDrawerLayout();
+    void closeDrawerLayout();
 }

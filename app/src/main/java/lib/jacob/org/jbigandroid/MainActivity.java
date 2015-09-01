@@ -94,4 +94,12 @@ public class MainActivity extends BaseDrawerActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void selectPaintTab() {
+        mTabLayout.getTabAt(0).select();
+    }
+
+    public void selectDecodeTab() {
+        mTabLayout.getTabAt(1).select();
+    }
 }

@@ -26,14 +26,14 @@ public class JbigApplication extends Application implements Injector {
         RealmConfiguration config = new RealmConfiguration.Builder(this).build();
         Realm.setDefaultConfiguration(config);
 
-        /*mObjectGraph = ObjectGraph.create(new ContextProvider(this),
+        mObjectGraph = ObjectGraph.create(new ContextProvider(this),
                 new InjectorProvider(this),
                 new UtilsProvider(this),
                 new StateProvider(),
-                new PersistenceProvider());*/
+                new PersistenceProvider());
         mObjectGraph = ObjectGraph.create();
 
-        // mObjectGraph.inject(this);
+        mObjectGraph.inject(this);
     }
 
     @Override

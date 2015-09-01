@@ -1,6 +1,7 @@
 package lib.jacob.org.jbigandroid.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,8 +35,11 @@ public class PaintViewFragment extends Fragment {
 
     private PaintView mPaintView;
 
-    @Bind(R.id.button)
-    Button mButton;
+    @Bind(R.id.encoder)
+    Button mEncodeBtn;
+
+    @Bind(R.id.clear)
+    Button mClearBtn;
 
     @Bind(R.id.paint_content)
     FrameLayout mFrameLayout;
@@ -78,7 +82,7 @@ public class PaintViewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_paint_view, container, false);
         ButterKnife.bind(this, view);
 
-        mButton.setEnabled(false);
+        mEncodeBtn.setEnabled(false);
         mPaintView = new PaintView(getActivity());
         AbsListView.LayoutParams params = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
@@ -88,7 +92,7 @@ public class PaintViewFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    mButton.setEnabled(true);
+                    mEncodeBtn.setEnabled(true);
                 }
 
                 return false;
@@ -101,8 +105,8 @@ public class PaintViewFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
     }
 
@@ -118,7 +122,7 @@ public class PaintViewFragment extends Fragment {
         super.onDestroyView();
     }
 
-    @OnClick(R.id.button)
+    @OnClick(R.id.encoder)
     public void onEncodeClicked() {
         //TODO:XXX pop up a dialog, clean the PaintView.
         Bitmap bitmap = mPaintView.getCachebBitmap();
@@ -143,5 +147,11 @@ public class PaintViewFragment extends Fragment {
             String serializedJbig = ByteUtils.byteArray2HexString(jbigData);
             Log.e("Encode", serializedJbig);
         }
+    }
+
+    @OnClick(R.id.clear)
+    public void onClearBtnClicked() {
+        mPaintView.clear();
+        mEncodeBtn.setEnabled(false);
     }
 }

@@ -31,9 +31,8 @@ public class JbigApplication extends Application implements Injector {
                 new UtilsProvider(this),
                 new StateProvider(),
                 new PersistenceProvider());
-        mObjectGraph = ObjectGraph.create();
 
-        mObjectGraph.inject(this);
+        // mObjectGraph.inject(this);
     }
 
     @Override

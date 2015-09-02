@@ -10,12 +10,14 @@ import dagger.Module;
 import dagger.Provides;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import lib.jacob.org.jbigandroid.db.RealmDbOpenHelper;
 
 /**
  * Created by moses on 8/31/15.
  */
 
 @Module(
+        injects = {RealmDbOpenHelper.class},
         library = true
 )
 public class UtilsProvider {

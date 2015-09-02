@@ -16,8 +16,12 @@ import lib.jacob.org.jbigandroid.realmobj.JbigItem;
  */
 public class RealmDbOpenHelper implements DatabaseHelper {
 
-    @Inject
     private Realm mRealm;
+
+    @Inject
+    public RealmDbOpenHelper(Realm realm) {
+        mRealm = realm;
+    }
 
     @Override
     public List<byte[]> getJbigs() {

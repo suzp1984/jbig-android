@@ -14,7 +14,8 @@ import lib.jacob.org.jbigandroid.states.JbigDbState;
  */
 
 @Module(
-        includes = UtilsProvider.class
+        includes = {UtilsProvider.class},
+        library = true
 )
 public class StateProvider {
 
@@ -23,7 +24,7 @@ public class StateProvider {
         return new ApplicationState(bus);
     }
 
-    @Provides
+    @Provides @Singleton
     public JbigDbState provideJbigDbState(ApplicationState state) {
         return state;
     }

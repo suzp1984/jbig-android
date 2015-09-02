@@ -29,6 +29,7 @@ public abstract class BaseDrawerActivity extends AppCompatActivity {
         LayoutInflater.from(this).inflate(layoutId, parent, true);
 
         injectView();
+
     }
 
     @Override

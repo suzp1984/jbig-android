@@ -11,14 +11,14 @@ import lib.jacob.org.jbigandroid.db.RealmDbOpenHelper;
  * Created by moses on 8/31/15.
  */
 @Module(
-        injects = RealmDbOpenHelper.class,
         includes = {
                 UtilsProvider.class
-        }
+        },
+        library = true
 )
 public class PersistenceProvider {
     @Provides @Singleton
-    public DatabaseHelper getDatabaseHelper() {
-        return new RealmDbOpenHelper();
+    public DatabaseHelper providerDatabaseHelper(RealmDbOpenHelper dbOpenHelper) {
+        return dbOpenHelper;
     }
 }

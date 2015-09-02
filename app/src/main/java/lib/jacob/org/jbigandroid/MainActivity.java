@@ -1,5 +1,6 @@
 package lib.jacob.org.jbigandroid;
 
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -29,6 +30,28 @@ public class MainActivity extends BaseDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewpage_sample);
+
+        mNavigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.paint_item:
+                                Log.e("TAG", "menu item paint item");
+                                break;
+                            case R.id.encoder:
+                                Log.e("TAG", "menu item encoder");
+                                break;
+                            case R.id.about:
+                                Log.e("TAG", "menu item about");
+                                break;
+                            default:
+                                return false;
+                        }
+
+                        return true;
+                    }
+                });
 
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);

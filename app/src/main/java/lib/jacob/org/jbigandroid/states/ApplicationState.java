@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import lib.jacob.org.jbigandroid.controller.MainController;
+
 /**
  * Created by moses on 8/31/15.
  */
@@ -18,6 +20,9 @@ public final class ApplicationState implements BaseState, JbigDbState {
     private final Bus mEventBus;
     private final List<byte[]> mJbigList = new ArrayList<>();
 
+    private MainController.TabItem mSelectedTabItem;
+
+    @Inject
     public ApplicationState(Bus eventBus) {
         mEventBus = Preconditions.checkNotNull(eventBus, "EventBus cannot be null");
     }
@@ -35,11 +40,23 @@ public final class ApplicationState implements BaseState, JbigDbState {
     @Override
     public void putJbig(byte[] jbig) {
         mJbigList.add(jbig);
+        mEventBus.post(new JbigDbAddEvent());
     }
 
     @Override
     public void putJbigs(Collection<byte[]> jbigs) {
         mJbigList.addAll(jbigs);
+        mEventBus.post(new JbigDbAddEvent());
+    }
+
+    @Override
+    public MainController.TabItem getSelectedTabItem() {
+        return mSelectedTabItem;
+    }
+
+    @Override
+    public void setSelectedTabItem(MainController.TabItem item) {
+        mSelectedTabItem = item;
     }
 
     @Override

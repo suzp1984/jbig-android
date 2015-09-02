@@ -49,6 +49,7 @@ public class MainActivity extends BaseDrawerActivity {
                                 return false;
                         }
 
+                        mDrawerLayout.closeDrawers();
                         return true;
                     }
                 });

@@ -12,4 +12,7 @@ public interface JbigDbState extends BaseState {
 
     void putJbig(byte[] jbig);
     void putJbigs(Collection<byte[]> jbigs);
+
+    public static class JbigDbAddEvent {
+    }
 }

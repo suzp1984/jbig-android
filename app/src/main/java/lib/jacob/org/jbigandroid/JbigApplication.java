@@ -2,9 +2,12 @@ package lib.jacob.org.jbigandroid;
 
 import android.app.Application;
 
+import javax.inject.Inject;
+
 import dagger.ObjectGraph;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import lib.jacob.org.jbigandroid.controller.MainController;
 import lib.jacob.org.jbigandroid.modules.ContextProvider;
 import lib.jacob.org.jbigandroid.modules.InjectorProvider;
 import lib.jacob.org.jbigandroid.modules.PersistenceProvider;
@@ -19,6 +22,9 @@ public class JbigApplication extends Application implements Injector {
 
     private ObjectGraph mObjectGraph;
 
+    @Inject
+    MainController mController;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -32,7 +38,7 @@ public class JbigApplication extends Application implements Injector {
                 new StateProvider(),
                 new PersistenceProvider());
 
-        // mObjectGraph.inject(this);
+        mObjectGraph.inject(this);
     }
 
     @Override

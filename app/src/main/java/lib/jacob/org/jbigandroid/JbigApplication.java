@@ -46,6 +46,10 @@ public class JbigApplication extends Application implements Injector {
         mObjectGraph.inject(object);
     }
 
+    public MainController getMainController() {
+        return mController;
+    }
+    
     public ObjectGraph getObjectGraph() {
         return mObjectGraph;
     }

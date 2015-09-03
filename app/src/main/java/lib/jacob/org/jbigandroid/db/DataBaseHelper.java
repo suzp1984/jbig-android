@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by moses on 8/31/15.
  */
-public interface DatabaseHelper {
+public interface DataBaseHelper {
     List<byte[]> getJbigs();
 
     byte[] getJbig(int position);

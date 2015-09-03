@@ -14,7 +14,7 @@ import lib.jacob.org.jbigandroid.realmobj.JbigItem;
 /**
  * Created by moses on 8/31/15.
  */
-public class RealmDbOpenHelper implements DatabaseHelper {
+public class RealmDbOpenHelper implements DataBaseHelper {
 
     private Realm mRealm;
 

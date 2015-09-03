@@ -4,7 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import lib.jacob.org.jbigandroid.db.DatabaseHelper;
+import lib.jacob.org.jbigandroid.db.DataBaseHelper;
 import lib.jacob.org.jbigandroid.db.RealmDbOpenHelper;
 
 /**
@@ -18,7 +18,7 @@ import lib.jacob.org.jbigandroid.db.RealmDbOpenHelper;
 )
 public class PersistenceProvider {
     @Provides @Singleton
-    public DatabaseHelper providerDatabaseHelper(RealmDbOpenHelper dbOpenHelper) {
+    public DataBaseHelper providerDatabaseHelper(RealmDbOpenHelper dbOpenHelper) {
         return dbOpenHelper;
     }
 }

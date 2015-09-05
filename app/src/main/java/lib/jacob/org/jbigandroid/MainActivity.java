@@ -41,9 +41,11 @@ public class MainActivity extends BaseDrawerActivity implements MainController.M
                         switch (menuItem.getItemId()) {
                             case R.id.paint_item:
                                 Log.e("TAG", "menu item paint item");
+                                mUiCallback.onTabItemSelected(MainController.TabItem.PAINT_TAB);
                                 break;
                             case R.id.encoder:
                                 Log.e("TAG", "menu item encoder");
+                                mUiCallback.onTabItemSelected(MainController.TabItem.DECODER_TAB);
                                 break;
                             case R.id.about:
                                 Log.e("TAG", "menu item about");

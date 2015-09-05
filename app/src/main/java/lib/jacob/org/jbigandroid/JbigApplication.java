@@ -1,6 +1,7 @@
 package lib.jacob.org.jbigandroid;
 
 import android.app.Application;
+import android.content.Context;
 
 import javax.inject.Inject;
 
@@ -24,6 +25,10 @@ public class JbigApplication extends Application implements Injector {
 
     @Inject
     MainController mController;
+
+    public static JbigApplication from(Context context) {
+        return  (JbigApplication) context.getApplicationContext();
+    }
 
     @Override
     public void onCreate() {

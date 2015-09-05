@@ -13,9 +13,10 @@ import android.view.View;
 
 import butterknife.Bind;
 import lib.jacob.org.jbigandroid.adapter.FragmentViewAdapter;
+import lib.jacob.org.jbigandroid.controller.MainController;
 import lib.jacob.org.jbigandroid.widget.SwipeControlViewPager;
 
-public class MainActivity extends BaseDrawerActivity {
+public class MainActivity extends BaseDrawerActivity implements MainController.MainControllerUi {
 
     @Bind(R.id.viewpager)
     SwipeControlViewPager mViewPager;
@@ -25,6 +26,8 @@ public class MainActivity extends BaseDrawerActivity {
 
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
+
+    private MainController.MainControllerUiCallback mUiCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,11 +122,36 @@ public class MainActivity extends BaseDrawerActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        getMainController().attachUi(this);
+    }
+
+    @Override
+    public void onPause() {
+        getMainController().detachUi(this);
+
+        super.onPause();
+    }
+
     public void selectPaintTab() {
         mTabLayout.getTabAt(0).select();
     }
 
     public void selectDecodeTab() {
         mTabLayout.getTabAt(1).select();
+    }
+
+    // implement MainControllerUi interface
+    @Override
+    public void setCallback(MainController.MainControllerUiCallback callback) {
+        mUiCallback = callback;
+    }
+
+    @Override
+    public boolean isModal() {
+        return false;
     }
 }

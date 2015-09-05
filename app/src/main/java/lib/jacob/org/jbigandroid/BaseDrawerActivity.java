@@ -12,6 +12,9 @@ import android.widget.FrameLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import lib.jacob.org.jbigandroid.controller.MainController;
+import lib.jacob.org.jbigandroid.display.AndroidDisplay;
+import lib.jacob.org.jbigandroid.display.IDisplay;
 
 public abstract class BaseDrawerActivity extends AppCompatActivity {
 
@@ -22,6 +25,9 @@ public abstract class BaseDrawerActivity extends AppCompatActivity {
     @Bind(R.id.nav_view)
     NavigationView mNavigationView;
 
+    private MainController mMainController;
+    private IDisplay mAndroidDisplay;
+
     @Override
     public void setContentView(int layoutId) {
         super.setContentView(R.layout.activity_base_drawer);
@@ -30,12 +36,14 @@ public abstract class BaseDrawerActivity extends AppCompatActivity {
 
         injectView();
 
+        mMainController = JbigApplication.from(this).getMainController();
+        mAndroidDisplay = new AndroidDisplay(this, mDrawerLayout);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // setContentView(R.layout.activity_base_drawer);
+
     }
 
     @Override
@@ -58,6 +66,33 @@ public abstract class BaseDrawerActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        mMainController.attachDisplay(mAndroidDisplay);
+        mMainController.init();
+    }
+
+    @Override
+    public void onPause() {
+        mMainController.suspend();
+        mMainController.detachDisplay(mAndroidDisplay);
+
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        mAndroidDisplay = null;
+    }
+
+    public MainController getMainController() {
+        return mMainController;
     }
 
     private void injectView() {

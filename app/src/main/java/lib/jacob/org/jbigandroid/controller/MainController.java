@@ -83,6 +83,19 @@ public class MainController extends BaseUiController<MainController.MainControll
         populateUis();
     }
 
+    public void attachDisplay(IDisplay display) {
+        Preconditions.checkNotNull(display, "display is null");
+
+        setDisplay(display);
+    }
+
+    public void detachDisplay(IDisplay display) {
+        Preconditions.checkNotNull(display, "display is null");
+        Preconditions.checkState(getDisplay() == display, "display is not attached");
+
+        setDisplay(null);
+    }
+
     private void populateUi(DecoderTabUi ui) {
         ui.showJbigs(mApplicationState.getJbigDbs());
     }

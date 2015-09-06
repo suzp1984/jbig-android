@@ -15,4 +15,8 @@ public interface JbigDbState extends BaseState {
 
     public static class JbigDbAddEvent {
     }
+
+    public static class JbigDbDeleteEvent {
+
+    }
 }

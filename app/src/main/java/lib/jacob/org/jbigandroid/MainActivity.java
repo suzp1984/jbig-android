@@ -16,7 +16,8 @@ import lib.jacob.org.jbigandroid.adapter.FragmentViewAdapter;
 import lib.jacob.org.jbigandroid.controller.MainController;
 import lib.jacob.org.jbigandroid.widget.SwipeControlViewPager;
 
-public class MainActivity extends BaseDrawerActivity implements MainController.MainControllerUi {
+public class MainActivity extends BaseDrawerActivity
+        implements MainController.MainControllerUi {
 
     @Bind(R.id.viewpager)
     SwipeControlViewPager mViewPager;

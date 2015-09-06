@@ -62,9 +62,6 @@ public class MainController extends BaseUiController<MainController.MainControll
     @Override
     void populateUi(MainControllerUi ui) {
         // do nothing?
-        if (ui instanceof DecoderTabUi) {
-            populateUi((DecoderTabUi) ui);
-        }
     }
 
     @Override
@@ -96,10 +93,6 @@ public class MainController extends BaseUiController<MainController.MainControll
         setDisplay(null);
     }
 
-    private void populateUi(DecoderTabUi ui) {
-        ui.showJbigs(mApplicationState.getJbigDbs());
-    }
-
     private void showUiItem(IDisplay display, TabItem item) {
         Preconditions.checkNotNull(display, "IDisplay cannot be null");
         Preconditions.checkNotNull(item, "TabItem cannot be null.");
@@ -123,10 +116,10 @@ public class MainController extends BaseUiController<MainController.MainControll
 
     }
 
-    public interface DecoderTabUi extends MainControllerUi {
+   /* public interface DecoderTabUi extends MainControllerUi {
         void showJbigs(List<byte[]> jbigs);
     }
-
+*/
     public interface MainControllerUiCallback {
         void onTabItemSelected(TabItem item);
     }

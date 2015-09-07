@@ -7,22 +7,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import io.realm.Realm;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
 import lib.jacob.org.jbigandroid.JbigApplication;
 import lib.jacob.org.jbigandroid.R;
 import lib.jacob.org.jbigandroid.adapter.ImageAdapter;
 import lib.jacob.org.jbigandroid.controller.JbigController;
-import lib.jacob.org.jbigandroid.realmobj.JbigItem;
-import lib.jacob.org.jbigandroid.utils.ByteUtils;
 
 public class DecoderFragment extends Fragment implements
         JbigController.JbigDecoderUi {

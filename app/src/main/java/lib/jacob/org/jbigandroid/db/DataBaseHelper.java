@@ -15,6 +15,7 @@ public interface DataBaseHelper {
 
     void put(Collection<byte[]> jbigs);
 
+    void delete(byte[] jbig);
     void delete(int position);
 
     void deleteAll();

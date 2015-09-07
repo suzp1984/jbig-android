@@ -1,12 +1,16 @@
 package lib.jacob.org.jbigandroid.adapter;
 
+import android.annotation.TargetApi;
 import android.graphics.Bitmap;
+import android.os.Build;
+import android.support.v4.graphics.BitmapCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +45,15 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         return mBitmaps.size();
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
     public void addBitmap(Bitmap bitmap) {
         if (bitmap != null && !mBitmaps.contains(bitmap)) {
+            for (Bitmap bm : mBitmaps) {
+                if (bitmap.sameAs(bm)) {
+                    return;
+                }
+            }
+
             mBitmaps.add(bitmap);
         }
     }

@@ -10,9 +10,6 @@ import android.util.Log;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.realm.Realm;
-import lib.jacob.org.jbigandroid.db.DataBaseHelper;
-import lib.jacob.org.jbigandroid.realmobj.JbigItem;
 import lib.jacob.org.jbigandroid.states.JbigDbState;
 import lib.jacob.org.jbigandroid.utils.ByteUtils;
 import lib.jacob.org.lib.JbigCodec;

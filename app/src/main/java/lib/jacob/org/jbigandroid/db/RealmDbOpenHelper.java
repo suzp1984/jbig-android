@@ -70,6 +70,21 @@ public class RealmDbOpenHelper implements DataBaseHelper {
     }
 
     @Override
+    public void delete(byte[] jbig) {
+        RealmQuery<JbigItem> query = mRealm.where(JbigItem.class);
+        RealmResults<JbigItem> results = query.findAll();
+
+        for (JbigItem item : results) {
+            if (item.getJbig() == jbig) {
+                mRealm.beginTransaction();
+                item.removeFromRealm();
+                mRealm.commitTransaction();
+                break;
+            }
+        }
+    }
+
+    @Override
     public void delete(int position) {
         RealmQuery<JbigItem> query = mRealm.where(JbigItem.class);
         RealmResults<JbigItem> results = query.findAll();

@@ -1,6 +1,7 @@
 package lib.jacob.org.jbigandroid.fragment;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -61,7 +62,6 @@ public class DecoderFragment extends Fragment implements
         ButterKnife.bind(this, view);
 
         mImageAdapter = new ImageAdapter();
-        // fetchJbigs();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -97,22 +97,15 @@ public class DecoderFragment extends Fragment implements
         super.onDetach();
     }
 
-    private void fetchJbigs() {
-        Realm realm = Realm.getDefaultInstance();
-
-        RealmQuery<JbigItem> query = realm.where(JbigItem.class);
-        RealmResults<JbigItem> results = query.findAll();
-
-        for (JbigItem item : results) {
-            mImageAdapter.addJbigImage(item.getJbig());
-        }
-    }
-
     // JbigDecoderUi
     @Override
     public void showJbig(byte[] jbig) {
-        Log.e("DecoderFragment", "showJbig: " + ByteUtils.byteArray2HexString(jbig));
-        mImageAdapter.addJbigImage(jbig);
+
+    }
+
+    @Override
+    public void showBitmaps(Bitmap[] bitmaps) {
+        mImageAdapter.addBitmap(bitmaps[0]);
         mImageAdapter.notifyDataSetChanged();
     }
 

@@ -103,8 +103,13 @@ public class JbigController extends
 
     private void populateUi(JbigDecoderUi ui) {
         Log.e("JbigController", "populateUi JbigDecoderUi");
-        for (byte[] jbig : mJbigDbState.getJbigDbs()) {
-            ui.showJbig(jbig);
+        JbigCodec jbigCodec = JbigCodecFactory.getJbigCodec(JbigCodecFactory.CODEC.JNI_CODEC);
+
+        if (jbigCodec != null) {
+            for (byte[] jbig : mJbigDbState.getJbigDbs()) {
+                Bitmap[] bms = jbigCodec.decode(jbig);
+                ui.showBitmaps(bms);
+            }
         }
     }
 
@@ -118,6 +123,7 @@ public class JbigController extends
 
     public interface JbigDecoderUi extends JbigControllerUi {
         void showJbig(byte[] jbig);
+        void showBitmaps(Bitmap[] bitmaps);
     }
 
     public interface JbigEncoderUi extends JbigControllerUi {

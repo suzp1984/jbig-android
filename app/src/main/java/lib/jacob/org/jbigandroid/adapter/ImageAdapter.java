@@ -19,7 +19,7 @@ import lib.jacob.org.lib.JbigCodecFactory;
  */
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
 
-    private final List<byte[]> mJbigDatas = new ArrayList<>();
+    private final List<Bitmap> mBitmaps = new ArrayList<>();
 
     @Override
     public ImageViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -32,28 +32,18 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     @Override
     public void onBindViewHolder(ImageViewHolder imageViewHolder, int i) {
-        byte[] jbig = mJbigDatas.get(i);
 
-        // TODO: move all decoder code to controller
-        JbigCodec jbigCodec = JbigCodecFactory.getJbigCodec(JbigCodecFactory.CODEC.JNI_CODEC);
-
-        if (jbigCodec != null) {
-            Bitmap[] bms = jbigCodec.decode(jbig);
-            imageViewHolder.image.setImageBitmap(bms[0]);
-        }
+        imageViewHolder.image.setImageBitmap(mBitmaps.get(i));
     }
 
     @Override
     public int getItemCount() {
-        return mJbigDatas.size();
+        return mBitmaps.size();
     }
 
-    public void addJbigImage(byte[] jbig) {
-
-        if (jbig != null && jbig.length > 0) {
-            if (!mJbigDatas.contains(jbig)) {
-                mJbigDatas.add(jbig);
-            }
+    public void addBitmap(Bitmap bitmap) {
+        if (bitmap != null && !mBitmaps.contains(bitmap)) {
+            mBitmaps.add(bitmap);
         }
     }
 

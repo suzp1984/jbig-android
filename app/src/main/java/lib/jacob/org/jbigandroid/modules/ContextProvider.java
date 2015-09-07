@@ -17,7 +17,8 @@ import lib.jacob.org.jbigandroid.JbigApplication;
         library = true,
         includes = {
                 UtilsProvider.class,
-                StateProvider.class
+                StateProvider.class,
+                PersistenceProvider.class
         }
 
 )

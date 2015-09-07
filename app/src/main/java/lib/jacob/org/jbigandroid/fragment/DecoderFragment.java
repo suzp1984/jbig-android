@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import lib.jacob.org.jbigandroid.R;
 import lib.jacob.org.jbigandroid.adapter.ImageAdapter;
 import lib.jacob.org.jbigandroid.controller.JbigController;
 import lib.jacob.org.jbigandroid.realmobj.JbigItem;
+import lib.jacob.org.jbigandroid.utils.ByteUtils;
 
 public class DecoderFragment extends Fragment implements
         JbigController.JbigDecoderUi {
@@ -59,7 +61,7 @@ public class DecoderFragment extends Fragment implements
         ButterKnife.bind(this, view);
 
         mImageAdapter = new ImageAdapter();
-        fetchJbigs();
+        // fetchJbigs();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -109,6 +111,7 @@ public class DecoderFragment extends Fragment implements
     // JbigDecoderUi
     @Override
     public void showJbig(byte[] jbig) {
+        Log.e("DecoderFragment", "showJbig: " + ByteUtils.byteArray2HexString(jbig));
         mImageAdapter.addJbigImage(jbig);
         mImageAdapter.notifyDataSetChanged();
     }

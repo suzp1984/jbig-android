@@ -49,8 +49,11 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     }
 
     public void addJbigImage(byte[] jbig) {
+
         if (jbig != null && jbig.length > 0) {
-            mJbigDatas.add(jbig);
+            if (!mJbigDatas.contains(jbig)) {
+                mJbigDatas.add(jbig);
+            }
         }
     }
 

@@ -5,11 +5,18 @@ import com.google.common.base.Preconditions;
 import com.squareup.otto.Subscribe;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.realm.Realm;
+import lib.jacob.org.jbigandroid.db.DataBaseHelper;
+import lib.jacob.org.jbigandroid.realmobj.JbigItem;
 import lib.jacob.org.jbigandroid.states.JbigDbState;
+import lib.jacob.org.jbigandroid.utils.ByteUtils;
+import lib.jacob.org.lib.JbigCodec;
+import lib.jacob.org.lib.JbigCodecFactory;
 
 /**
  * Created by moses on 9/6/15.
@@ -23,9 +30,7 @@ public class JbigController extends
 
     @Inject
     public JbigController(JbigDbState state) {
-        Preconditions.checkNotNull(state, "JbigDbState is not null.");
-
-        mJbigDbState = state;
+        mJbigDbState = Preconditions.checkNotNull(state, "JbigDbState is not null.");
     }
 
     @Override
@@ -33,7 +38,19 @@ public class JbigController extends
         return new JbigUiCallback() {
             @Override
             public void encodeBitmap(Bitmap bitmap) {
+                Bitmap[] bitmaps = new Bitmap[1];
+                bitmaps[0] = bitmap;
 
+                JbigCodec jbigCodec = JbigCodecFactory.getJbigCodec(JbigCodecFactory.CODEC.JNI_CODEC);
+
+                if (jbigCodec != null) {
+                    byte[] jbigData = jbigCodec.encode(bitmaps);
+
+                    mJbigDbState.putJbig(jbigData);
+
+                    String serializedJbig = ByteUtils.byteArray2HexString(jbigData);
+                    Log.e("Encode", serializedJbig);
+                }
             }
 
             @Override
@@ -43,7 +60,7 @@ public class JbigController extends
 
             @Override
             public void add(byte[] jbig) {
-
+                mJbigDbState.putJbig(jbig);
             }
         };
     }
@@ -60,6 +77,7 @@ public class JbigController extends
 
     @Override
     void populateUi(JbigControllerUi ui) {
+        Log.e("JbigController", "popularUi");
         if (ui instanceof JbigEncoderUi) {
             populateUi((JbigEncoderUi) ui);
         } else if (ui instanceof  JbigDecoderUi) {
@@ -79,10 +97,12 @@ public class JbigController extends
 
     @Subscribe
     public void onJbigDataAdd(JbigDbState.JbigDbAddEvent event) {
+        Log.e("JbigController", "onJbigDataAdd");
         populateUis();
     }
 
     private void populateUi(JbigDecoderUi ui) {
+        Log.e("JbigController", "populateUi JbigDecoderUi");
         for (byte[] jbig : mJbigDbState.getJbigDbs()) {
             ui.showJbig(jbig);
         }

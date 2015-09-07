@@ -176,7 +176,9 @@ public class PaintViewFragment extends Fragment implements
     private void encodeAndSave() {
         Bitmap bitmap = mPaintView.getCachebBitmap();
 
-        Bitmap[] bitmaps = new Bitmap[1];
+        mJbigUiCallback.encodeBitmap(bitmap);
+
+        /*Bitmap[] bitmaps = new Bitmap[1];
         bitmaps[0] = bitmap;
 
         JbigCodec jbigCodec = JbigCodecFactory.getJbigCodec(JbigCodecFactory.CODEC.JNI_CODEC);
@@ -195,7 +197,7 @@ public class PaintViewFragment extends Fragment implements
 
             String serializedJbig = ByteUtils.byteArray2HexString(jbigData);
             Log.e("Encode", serializedJbig);
-        }
+        }*/
     }
 
     // JbigEncoderUi

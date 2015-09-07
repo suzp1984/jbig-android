@@ -26,12 +26,14 @@ public class MainController extends BaseUiController<MainController.MainControll
     }
 
     private final ApplicationState mApplicationState;
+    private final JbigController mJbigController;
 
     @Inject
-    public MainController(ApplicationState state) {
+    public MainController(ApplicationState state, JbigController controller) {
         super();
 
         mApplicationState = Preconditions.checkNotNull(state, "Applicatin cannot be null.");
+        mJbigController = Preconditions.checkNotNull(controller, "JbigController cannot be null.");
     }
 
     @Override
@@ -67,11 +69,22 @@ public class MainController extends BaseUiController<MainController.MainControll
     @Override
     void onInited() {
         mApplicationState.registerForEvents(this);
+
+        mJbigController.init();
     }
 
     @Override
     void onSuspended() {
+        mJbigController.suspend();
+
         mApplicationState.unregisterForEvents(this);
+    }
+
+    @Override
+    protected void setDisplay(IDisplay display) {
+        super.setDisplay(display);
+
+        mJbigController.setDisplay(display);
     }
 
     @Subscribe
@@ -91,6 +104,10 @@ public class MainController extends BaseUiController<MainController.MainControll
         Preconditions.checkState(getDisplay() == display, "display is not attached");
 
         setDisplay(null);
+    }
+
+    public JbigController getJbigController() {
+        return mJbigController;
     }
 
     private void showUiItem(IDisplay display, TabItem item) {
@@ -116,10 +133,6 @@ public class MainController extends BaseUiController<MainController.MainControll
 
     }
 
-   /* public interface DecoderTabUi extends MainControllerUi {
-        void showJbigs(List<byte[]> jbigs);
-    }
-*/
     public interface MainControllerUiCallback {
         void onTabItemSelected(TabItem item);
     }

@@ -16,7 +16,8 @@ import lib.jacob.org.jbigandroid.JbigApplication;
         injects = JbigApplication.class,
         library = true,
         includes = {
-                UtilsProvider.class
+                UtilsProvider.class,
+                StateProvider.class
         }
 
 )

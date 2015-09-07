@@ -15,16 +15,21 @@ import butterknife.ButterKnife;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
+import lib.jacob.org.jbigandroid.JbigApplication;
 import lib.jacob.org.jbigandroid.R;
 import lib.jacob.org.jbigandroid.adapter.ImageAdapter;
+import lib.jacob.org.jbigandroid.controller.JbigController;
 import lib.jacob.org.jbigandroid.realmobj.JbigItem;
 
-public class DecoderFragment extends Fragment {
+public class DecoderFragment extends Fragment implements
+        JbigController.JbigDecoderUi {
 
     @Bind(R.id.recycler)
     RecyclerView mRecyclerView;
 
     private ImageAdapter mImageAdapter;
+
+    private JbigController.JbigUiCallback mJbigUiCallback;
 
     public static DecoderFragment newInstance() {
         DecoderFragment fragment = new DecoderFragment();
@@ -37,9 +42,13 @@ public class DecoderFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -61,13 +70,17 @@ public class DecoderFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onResume() {
+        super.onResume();
+
+        getController().attachUi(this);
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onPause() {
+        getController().detachUi(this);
+
+        super.onPause();
     }
 
     @Override
@@ -75,6 +88,11 @@ public class DecoderFragment extends Fragment {
         ButterKnife.unbind(this);
 
         super.onDestroyView();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
     }
 
     private void fetchJbigs() {
@@ -86,5 +104,26 @@ public class DecoderFragment extends Fragment {
         for (JbigItem item : results) {
             mImageAdapter.addJbigImage(item.getJbig());
         }
+    }
+
+    // JbigDecoderUi
+    @Override
+    public void showJbig(byte[] jbig) {
+        mImageAdapter.addJbigImage(jbig);
+        mImageAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setCallback(JbigController.JbigUiCallback callback) {
+        mJbigUiCallback = callback;
+    }
+
+    @Override
+    public boolean isModal() {
+        return false;
+    }
+
+    private JbigController getController() {
+        return JbigApplication.from(getActivity()).getMainController().getJbigController();
     }
 }

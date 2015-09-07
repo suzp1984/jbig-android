@@ -34,6 +34,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     public void onBindViewHolder(ImageViewHolder imageViewHolder, int i) {
         byte[] jbig = mJbigDatas.get(i);
 
+        // TODO: move all decoder code to controller
         JbigCodec jbigCodec = JbigCodecFactory.getJbigCodec(JbigCodecFactory.CODEC.JNI_CODEC);
 
         if (jbigCodec != null) {

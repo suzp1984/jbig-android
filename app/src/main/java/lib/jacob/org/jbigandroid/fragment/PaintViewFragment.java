@@ -19,7 +19,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
+import lib.jacob.org.jbigandroid.JbigApplication;
 import lib.jacob.org.jbigandroid.R;
+import lib.jacob.org.jbigandroid.controller.JbigController;
 import lib.jacob.org.jbigandroid.realmobj.JbigItem;
 import lib.jacob.org.jbigandroid.utils.ByteUtils;
 import lib.jacob.org.jbigandroid.widget.PaintView;
@@ -27,7 +29,8 @@ import lib.jacob.org.lib.JbigCodec;
 import lib.jacob.org.lib.JbigCodecFactory;
 
 public class PaintViewFragment extends Fragment implements
-        EncoderDialogFragment.EncodeDialogListener {
+        EncoderDialogFragment.EncodeDialogListener,
+        JbigController.JbigEncoderUi {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -46,6 +49,7 @@ public class PaintViewFragment extends Fragment implements
     @Bind(R.id.paint_content)
     FrameLayout mFrameLayout;
 
+    private JbigController.JbigUiCallback mJbigUiCallback;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -66,6 +70,12 @@ public class PaintViewFragment extends Fragment implements
 
     public PaintViewFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
     }
 
     @Override
@@ -107,14 +117,17 @@ public class PaintViewFragment extends Fragment implements
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onResume() {
+        super.onResume();
 
+        getController().attachUi(this);
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onPause() {
+        getController().detachUi(this);
+
+        super.onPause();
     }
 
     @Override
@@ -124,6 +137,12 @@ public class PaintViewFragment extends Fragment implements
         super.onDestroyView();
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+    // onClick listener
     @OnClick(R.id.encoder)
     public void onEncodeClicked() {
         //TODO:XXX pop up a dialog, clean the PaintView.
@@ -177,5 +196,20 @@ public class PaintViewFragment extends Fragment implements
             String serializedJbig = ByteUtils.byteArray2HexString(jbigData);
             Log.e("Encode", serializedJbig);
         }
+    }
+
+    // JbigEncoderUi
+    @Override
+    public void setCallback(JbigController.JbigUiCallback callback) {
+        mJbigUiCallback = callback;
+    }
+
+    @Override
+    public boolean isModal() {
+        return false;
+    }
+
+    private JbigController getController() {
+        return JbigApplication.from(getActivity()).getMainController().getJbigController();
     }
 }

@@ -48,7 +48,7 @@ public class PaintView extends View {
         if (mCacheCanvas != null) {
             mPaint.setColor(Color.rgb(245, 245, 245));
             mPaint.setARGB(255, 75, 75, 73);
-            mCacheCanvas.drawColor(Color.WHITE);
+            mCachebBitmap.eraseColor(Color.TRANSPARENT);
             mCacheCanvas.drawColor(Color.TRANSPARENT);
             invalidate();
         }

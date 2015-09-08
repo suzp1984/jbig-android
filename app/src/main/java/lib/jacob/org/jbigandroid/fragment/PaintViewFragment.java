@@ -171,27 +171,6 @@ public class PaintViewFragment extends Fragment implements
         Bitmap bitmap = mPaintView.getCachebBitmap();
 
         mJbigUiCallback.encodeBitmap(bitmap);
-
-        /*Bitmap[] bitmaps = new Bitmap[1];
-        bitmaps[0] = bitmap;
-
-        JbigCodec jbigCodec = JbigCodecFactory.getJbigCodec(JbigCodecFactory.CODEC.JNI_CODEC);
-
-        if (jbigCodec != null) {
-            byte[] jbigData = jbigCodec.encode(bitmaps);
-
-            Realm realm = Realm.getInstance(getActivity());
-            realm.beginTransaction();
-
-            JbigItem item = realm.createObject(JbigItem.class);
-            item.setTag("PaintView");
-            item.setJbig(jbigData);
-
-            realm.commitTransaction();
-
-            String serializedJbig = ByteUtils.byteArray2HexString(jbigData);
-            Log.e("Encode", serializedJbig);
-        }*/
     }
 
     // JbigEncoderUi

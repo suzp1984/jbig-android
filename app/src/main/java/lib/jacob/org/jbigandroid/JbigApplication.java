@@ -34,9 +34,6 @@ public class JbigApplication extends Application implements Injector {
     public void onCreate() {
         super.onCreate();
 
-        RealmConfiguration config = new RealmConfiguration.Builder(this).build();
-        Realm.setDefaultConfiguration(config);
-
         mObjectGraph = ObjectGraph.create(new ContextProvider(this),
                 new InjectorProvider(this),
                 new UtilsProvider(this),

@@ -1,5 +1,7 @@
 package lib.jacob.org.jbigandroid.db;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -53,6 +55,8 @@ public class RealmDbOpenHelper implements DataBaseHelper {
 
     @Override
     public void put(byte[] jbig) {
+        Log.d("ReamlDb", "save realm object.");
+
         mRealm.beginTransaction();
 
         JbigItem item = mRealm.createObject(JbigItem.class);

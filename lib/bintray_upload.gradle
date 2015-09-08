@@ -12,6 +12,7 @@ install {
         pom {
             project {
                 packaging 'aar'
+                artifactId 'jbig-android'
 
                 // Add your description here
                 name 'jbig library aar project for android'
@@ -24,6 +25,7 @@ install {
                         url 'http://www.gnu.org/licenses/gpl.txt'
                     }
                 }
+
                 developers {
                     developer {
                         id 'suzp1984'

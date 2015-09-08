@@ -192,7 +192,7 @@ static jobject decode_jbig_plane(JNIEnv* env, unsigned char* p, unsigned long si
     return bitmap;
 }
 
-jbyteArray Java_lib_jacob_org_lib_JniJbigCodec_encodeNative(JNIEnv* env, jobject thiz, jobjectArray bitmap_array)
+jbyteArray Java_lib_jacob_org_jbig_JniJbigCodec_encodeNative(JNIEnv* env, jobject thiz, jobjectArray bitmap_array)
 {
     LOGI("jbig encode native");
 
@@ -276,7 +276,7 @@ jbyteArray Java_lib_jacob_org_lib_JniJbigCodec_encodeNative(JNIEnv* env, jobject
     return ret_array;
 }
 
-jobjectArray Java_lib_jacob_org_lib_JniJbigCodec_decodeNative(JNIEnv* env, jobject thiz, jbyteArray data)
+jobjectArray Java_lib_jacob_org_jbig_JniJbigCodec_decodeNative(JNIEnv* env, jobject thiz, jbyteArray data)
 {
     LOGI("jbig decode native");
     struct jbg_dec_state s;

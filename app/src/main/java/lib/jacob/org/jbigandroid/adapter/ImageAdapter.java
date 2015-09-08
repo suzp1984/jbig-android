@@ -3,20 +3,16 @@ package lib.jacob.org.jbigandroid.adapter;
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.os.Build;
-import android.support.v4.graphics.BitmapCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
 import lib.jacob.org.jbigandroid.R;
-import lib.jacob.org.lib.JbigCodec;
-import lib.jacob.org.lib.JbigCodecFactory;
 
 /**
  * Created by moses on 8/28/15.

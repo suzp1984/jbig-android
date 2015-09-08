@@ -1,6 +1,5 @@
 package lib.jacob.org.jbigandroid.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -18,15 +17,10 @@ import android.widget.FrameLayout;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.realm.Realm;
 import lib.jacob.org.jbigandroid.JbigApplication;
 import lib.jacob.org.jbigandroid.R;
 import lib.jacob.org.jbigandroid.controller.JbigController;
-import lib.jacob.org.jbigandroid.realmobj.JbigItem;
-import lib.jacob.org.jbigandroid.utils.ByteUtils;
 import lib.jacob.org.jbigandroid.widget.PaintView;
-import lib.jacob.org.lib.JbigCodec;
-import lib.jacob.org.lib.JbigCodecFactory;
 
 public class PaintViewFragment extends Fragment implements
         EncoderDialogFragment.EncodeDialogListener,

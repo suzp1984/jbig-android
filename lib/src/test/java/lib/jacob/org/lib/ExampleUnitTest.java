@@ -1,4 +1,4 @@
-package lib.jacob.org.lib;
+package lib.jacob.org.jbig;
 
 import org.junit.Test;
 

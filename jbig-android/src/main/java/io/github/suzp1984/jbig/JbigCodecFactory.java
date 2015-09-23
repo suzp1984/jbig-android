@@ -1,5 +1,5 @@
 
-package lib.jacob.org.jbig;
+package io.github.suzp1984.jbig;
 
 /**
  * Created by moses on 8/5/14.

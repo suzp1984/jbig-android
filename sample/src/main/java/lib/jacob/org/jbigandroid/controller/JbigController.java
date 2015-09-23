@@ -12,8 +12,8 @@ import javax.inject.Singleton;
 
 import lib.jacob.org.jbigandroid.states.JbigDbState;
 import lib.jacob.org.jbigandroid.utils.ByteUtils;
-import lib.jacob.org.jbig.JbigCodec;
-import lib.jacob.org.jbig.JbigCodecFactory;
+import io.github.suzp1984.jbig.JbigCodec;
+import io.github.suzp1984.jbig.JbigCodecFactory;
 
 /**
  * Created by moses on 9/6/15.

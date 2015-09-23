@@ -4,7 +4,7 @@ version = android.defaultConfig.versionName
 def siteUrl = 'https://github.com/suzp1984/jbig-android'      // Homepage URL of the library
 def gitUrl = 'https://github.com/suzp1984/jbig-android.git'   // Git repository URL
 
-group = "org.jacob.lib.jbig"
+group = "io.github.suzp1984.jbig"
 
 install {
     repositories.mavenInstaller {

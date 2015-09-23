@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="lib.jacob.org.jbigandroid" >
+          package="io.github.suzp1984.jbigandroid" >
 
     <application
             android:allowBackup="true"

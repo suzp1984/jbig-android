@@ -4,7 +4,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 try {
-    apply from: '/Users/moses/signing.gradle'
+    apply from: '../../signing.gradle'
 } catch (ex) {
     ex.printStackTrace()
 }

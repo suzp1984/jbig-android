@@ -1,1 +1,1 @@
-include ':sample', ':jbig-android'
+include ':sample', ':jbig-android-library'

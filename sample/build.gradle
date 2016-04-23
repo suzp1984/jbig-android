@@ -16,7 +16,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
     defaultConfig {
-        applicationId "lib.jacob.org.jbigandroid"
+        applicationId "io.github.suzp1984.jbigandroid"
         minSdkVersion 10
         targetSdkVersion 23
         versionCode 1

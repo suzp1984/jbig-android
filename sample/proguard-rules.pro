@@ -44,3 +44,9 @@
     @com.squareup.otto.Subscribe public *;
     @com.squareup.otto.Produce public *;
 }
+
+# AboutLibrary
+-keep class .R
+-keep class **.R$* {
+    <fields>;
+}

@@ -11,6 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.LibsBuilder;
+import com.mikepenz.aboutlibraries.util.Colors;
+
 import butterknife.Bind;
 import io.github.suzp1984.jbigandroid.adapter.FragmentViewAdapter;
 import io.github.suzp1984.jbigandroid.controller.MainController;
@@ -50,6 +54,7 @@ public class MainActivity extends BaseDrawerActivity
                                 break;
                             case R.id.about:
                                 Log.e("TAG", "menu item about");
+                                startAboutLibrary();
                                 break;
                             default:
                                 return false;
@@ -118,7 +123,8 @@ public class MainActivity extends BaseDrawerActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
+            startAboutLibrary();
             return true;
         }
 
@@ -156,5 +162,19 @@ public class MainActivity extends BaseDrawerActivity
     @Override
     public boolean isModal() {
         return false;
+    }
+
+    private void startAboutLibrary() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new LibsBuilder().withActivityStyle(Libs.ActivityStyle.DARK)
+                        .withActivityColor(new Colors(R.color.light_black, R.color.black))
+                        .withAboutIconShown(true)
+                        .withAboutVersionShown(true)
+                        .withAboutDescription("Good people does good things.")
+                        .start(MainActivity.this);
+            }
+        });
     }
 }

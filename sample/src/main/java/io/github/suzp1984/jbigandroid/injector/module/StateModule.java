@@ -1,4 +1,4 @@
-package io.github.suzp1984.jbigandroid.modules;
+package io.github.suzp1984.jbigandroid.injector.module;
 
 import com.squareup.otto.Bus;
 
@@ -11,19 +11,12 @@ import io.github.suzp1984.jbigandroid.states.ApplicationState;
 import io.github.suzp1984.jbigandroid.states.JbigDbState;
 
 /**
- * Created by moses on 8/31/15.
+ * Created by jacobsu on 4/24/16.
  */
-
-@Module(
-        includes = {
-                UtilsProvider.class,
-                PersistenceProvider.class
-        },
-        library = true
-)
-public class StateProvider {
-
-    @Provides @Singleton
+@Module
+public class StateModule {
+    @Provides
+    @Singleton
     public ApplicationState provideApplicationState(Bus bus, DataBaseHelper helper) {
         return new ApplicationState(bus, helper);
     }

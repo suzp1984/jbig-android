@@ -1,12 +1,11 @@
 package io.github.suzp1984.jbigandroid.controller;
 
-import com.google.common.base.Preconditions;
-
 import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import dagger.internal.Preconditions;
 import io.github.suzp1984.jbigandroid.display.IDisplay;
 import io.github.suzp1984.jbigandroid.states.ApplicationState;
 import io.github.suzp1984.jbigandroid.states.JbigDbState;
@@ -100,7 +99,9 @@ public class MainController extends BaseUiController<MainController.MainControll
 
     public void detachDisplay(IDisplay display) {
         Preconditions.checkNotNull(display, "display is null");
-        Preconditions.checkState(getDisplay() == display, "display is not attached");
+        if (getDisplay() != display) {
+            throw new RuntimeException("display is not attached");
+        }
 
         setDisplay(null);
     }

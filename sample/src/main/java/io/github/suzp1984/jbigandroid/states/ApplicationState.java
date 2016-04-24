@@ -1,7 +1,5 @@
 package io.github.suzp1984.jbigandroid.states;
 
-import com.google.common.base.Preconditions;
-
 import com.squareup.otto.Bus;
 
 import java.util.ArrayList;
@@ -10,6 +8,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import dagger.internal.Preconditions;
 import io.github.suzp1984.jbigandroid.controller.MainController;
 import io.github.suzp1984.jbigandroid.db.DataBaseHelper;
 

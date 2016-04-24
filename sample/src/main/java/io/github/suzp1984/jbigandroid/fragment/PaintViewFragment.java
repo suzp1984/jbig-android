@@ -14,12 +14,15 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.suzp1984.jbigandroid.JbigApplication;
 import io.github.suzp1984.jbigandroid.R;
 import io.github.suzp1984.jbigandroid.controller.JbigController;
+import io.github.suzp1984.jbigandroid.controller.MainController;
 import io.github.suzp1984.jbigandroid.widget.PaintView;
 
 public class PaintViewFragment extends Fragment implements
@@ -43,6 +46,9 @@ public class PaintViewFragment extends Fragment implements
     @Bind(R.id.paint_content)
     FrameLayout mFrameLayout;
 
+    @Inject
+    MainController mMainController;
+
     private JbigController.JbigUiCallback mJbigUiCallback;
     /**
      * Use this factory method to create a new instance of
@@ -64,6 +70,7 @@ public class PaintViewFragment extends Fragment implements
 
     public PaintViewFragment() {
         // Required empty public constructor
+        ((JbigApplication)getActivity().getApplication()).getApplicationComponent().inject(this);
     }
 
     @Override
@@ -185,6 +192,6 @@ public class PaintViewFragment extends Fragment implements
     }
 
     private JbigController getController() {
-        return JbigApplication.from(getActivity()).getMainController().getJbigController();
+        return mMainController.getJbigController();
     }
 }

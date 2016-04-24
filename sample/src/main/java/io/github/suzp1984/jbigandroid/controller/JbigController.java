@@ -1,7 +1,5 @@
 package io.github.suzp1984.jbigandroid.controller;
 
-import com.google.common.base.Preconditions;
-
 import com.squareup.otto.Subscribe;
 
 import android.graphics.Bitmap;
@@ -10,6 +8,7 @@ import android.util.Log;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import dagger.internal.Preconditions;
 import io.github.suzp1984.jbig.JbigCodec;
 import io.github.suzp1984.jbig.JbigCodecFactory;
 import io.github.suzp1984.jbigandroid.states.JbigDbState;

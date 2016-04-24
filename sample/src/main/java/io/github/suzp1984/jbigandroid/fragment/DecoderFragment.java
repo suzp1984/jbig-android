@@ -12,18 +12,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.suzp1984.jbigandroid.JbigApplication;
 import io.github.suzp1984.jbigandroid.R;
 import io.github.suzp1984.jbigandroid.adapter.ImageAdapter;
 import io.github.suzp1984.jbigandroid.controller.JbigController;
+import io.github.suzp1984.jbigandroid.controller.MainController;
 
 public class DecoderFragment extends Fragment implements
         JbigController.JbigDecoderUi {
 
     @Bind(R.id.recycler)
     RecyclerView mRecyclerView;
+
+    @Inject
+    MainController mMainController;
 
     private ImageAdapter mImageAdapter;
 
@@ -37,6 +43,7 @@ public class DecoderFragment extends Fragment implements
 
     public DecoderFragment() {
         // Required empty public constructor
+        ((JbigApplication) getActivity().getApplication()).getApplicationComponent().inject(this);
     }
 
     @Override
@@ -47,6 +54,7 @@ public class DecoderFragment extends Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -116,6 +124,7 @@ public class DecoderFragment extends Fragment implements
     }
 
     private JbigController getController() {
-        return JbigApplication.from(getActivity()).getMainController().getJbigController();
+
+        return mMainController.getJbigController();
     }
 }

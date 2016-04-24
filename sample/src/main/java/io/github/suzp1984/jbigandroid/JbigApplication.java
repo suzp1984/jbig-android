@@ -5,25 +5,21 @@ import android.content.Context;
 
 import javax.inject.Inject;
 
-import dagger.ObjectGraph;
 import io.github.suzp1984.jbigandroid.controller.MainController;
-import io.github.suzp1984.jbigandroid.modules.ContextProvider;
-import io.github.suzp1984.jbigandroid.modules.InjectorProvider;
-import io.github.suzp1984.jbigandroid.modules.PersistenceProvider;
-import io.github.suzp1984.jbigandroid.modules.StateProvider;
-import io.github.suzp1984.jbigandroid.modules.UtilsProvider;
-import io.github.suzp1984.jbigandroid.utils.Injector;
+import io.github.suzp1984.jbigandroid.injector.component.ApplicationComponent;
+import io.github.suzp1984.jbigandroid.injector.component.DaggerApplicationComponent;
+import io.github.suzp1984.jbigandroid.injector.module.ApplicationModule;
+import io.github.suzp1984.jbigandroid.injector.module.PersistenceModule;
+import io.github.suzp1984.jbigandroid.injector.module.StateModule;
+import io.github.suzp1984.jbigandroid.injector.module.UtilsModule;
 
 
 /**
  * Created by moses on 8/28/15.
  */
-public class JbigApplication extends Application implements Injector {
+public class JbigApplication extends Application {
 
-    private ObjectGraph mObjectGraph;
-
-    @Inject
-    MainController mController;
+    private ApplicationComponent mApplicationComponent;
 
     public static JbigApplication from(Context context) {
         return  (JbigApplication) context.getApplicationContext();
@@ -33,25 +29,20 @@ public class JbigApplication extends Application implements Injector {
     public void onCreate() {
         super.onCreate();
 
-        mObjectGraph = ObjectGraph.create(new ContextProvider(this),
-                new InjectorProvider(this),
-                new UtilsProvider(this),
-                new StateProvider(),
-                new PersistenceProvider());
-
-        mObjectGraph.inject(this);
     }
 
-    @Override
-    public void inject(Object object) {
-        mObjectGraph.inject(object);
+    public ApplicationComponent getApplicationComponent() {
+        if (mApplicationComponent == null) {
+
+            mApplicationComponent = DaggerApplicationComponent.builder()
+                    .applicationModule(new ApplicationModule(this))
+                    .persistenceModule(new PersistenceModule())
+                    .stateModule(new StateModule())
+                    .utilsModule(new UtilsModule(this))
+                    .build();
+        }
+
+        return mApplicationComponent;
     }
 
-    public MainController getMainController() {
-        return mController;
-    }
-    
-    public ObjectGraph getObjectGraph() {
-        return mObjectGraph;
-    }
 }

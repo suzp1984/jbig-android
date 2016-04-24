@@ -1,4 +1,4 @@
-package io.github.suzp1984.jbigandroid.modules;
+package io.github.suzp1984.jbigandroid.injector.module;
 
 import javax.inject.Singleton;
 
@@ -8,16 +8,12 @@ import io.github.suzp1984.jbigandroid.db.DataBaseHelper;
 import io.github.suzp1984.jbigandroid.db.RealmDbOpenHelper;
 
 /**
- * Created by moses on 8/31/15.
+ * Created by jacobsu on 4/24/16.
  */
-@Module(
-        includes = {
-                UtilsProvider.class
-        },
-        library = true
-)
-public class PersistenceProvider {
-    @Provides @Singleton
+@Module
+public class PersistenceModule {
+    @Provides
+    @Singleton
     public DataBaseHelper providerDatabaseHelper(RealmDbOpenHelper dbOpenHelper) {
         return dbOpenHelper;
     }

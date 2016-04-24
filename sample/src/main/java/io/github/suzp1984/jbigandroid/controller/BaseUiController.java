@@ -1,10 +1,10 @@
 package io.github.suzp1984.jbigandroid.controller;
 
-import com.google.common.base.Preconditions;
-
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
+
+import dagger.internal.Preconditions;
 
 /**
  * Created by moses on 9/1/15.
@@ -26,8 +26,10 @@ abstract class BaseUiController<U extends BaseUiController.Ui<UC>, UC>
     abstract void populateUi(U ui);
 
     public synchronized final void attachUi(U ui) {
-        Preconditions.checkArgument(ui != null, "ui cannot be null");
-        Preconditions.checkState(!mUis.contains(ui), "Ui is already attached");
+        Preconditions.checkNotNull(ui, "ui cannot be null");
+        if (mUis.contains(ui)) {
+            throw new RuntimeException("Ui is already attached");
+        }
 
         mUis.add(ui);
         ui.setCallback(createUiCallbacks(ui));
@@ -39,8 +41,10 @@ abstract class BaseUiController<U extends BaseUiController.Ui<UC>, UC>
     }
 
     public synchronized final void detachUi(U ui) {
-        Preconditions.checkArgument(ui != null, "ui cannot be null");
-        Preconditions.checkState(mUis.contains(ui), "ui is not attached.");
+        Preconditions.checkNotNull(ui, "ui cannot be null");
+        if (!mUis.contains(ui)) {
+            throw new RuntimeException("ui is not attached.");
+        }
 
         onUiDetached(ui);
         ui.setCallback(null);

@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.suzp1984.jbigandroid.controller.MainController;
@@ -24,7 +26,8 @@ public abstract class BaseDrawerActivity extends AppCompatActivity {
     @Bind(R.id.nav_view)
     NavigationView mNavigationView;
 
-    private MainController mMainController;
+    @Inject
+    MainController mMainController;
     private IDisplay mAndroidDisplay;
 
     @Override
@@ -35,7 +38,6 @@ public abstract class BaseDrawerActivity extends AppCompatActivity {
 
         injectView();
 
-        mMainController = JbigApplication.from(this).getMainController();
         mAndroidDisplay = new AndroidDisplay(this, mDrawerLayout);
     }
 
@@ -43,6 +45,7 @@ public abstract class BaseDrawerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ((JbigApplication) getApplication()).getApplicationComponent().inject(this);
     }
 
     @Override

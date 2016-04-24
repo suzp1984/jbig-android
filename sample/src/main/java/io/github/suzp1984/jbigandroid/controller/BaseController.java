@@ -1,8 +1,6 @@
 package io.github.suzp1984.jbigandroid.controller;
 
-
-import com.google.common.base.Preconditions;
-
+import dagger.internal.Preconditions;
 import io.github.suzp1984.jbigandroid.display.IDisplay;
 
 /**
@@ -14,14 +12,19 @@ abstract class BaseController {
     private boolean mInited;
 
     public final void init() {
-        Preconditions.checkState(mInited == false, "Already inited");
+        if (mInited == true) {
+            throw new RuntimeException("Already inited");
+        }
 
         mInited = true;
         onInited();
     }
 
     public final void suspend() {
-        Preconditions.checkState(mInited == true, "Not inited");
+        if (mInited == false) {
+            throw new RuntimeException("Not Inited");
+        }
+
         onSuspended();
         mInited = false;
     }

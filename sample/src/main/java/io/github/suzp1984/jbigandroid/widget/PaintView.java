@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -100,6 +102,21 @@ public class PaintView extends View {
         }
 
         return true;
+    }
+
+    @Override
+    protected void onRestoreInstanceState (Parcelable state) {
+        /*Parcel parcel = Parcel.obtain();
+        state.writeToParcel(parcel, 0);
+        mCachebBitmap = Bitmap.CREATOR.createFromParcel(parcel);
+        invalidate();*/
+        super.onRestoreInstanceState(state);
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState () {
+        return super.onSaveInstanceState();
+        // return mCachebBitmap;
     }
 
     private void touch_start(float x, float y) {

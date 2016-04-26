@@ -118,6 +118,14 @@ public class PaintViewFragment extends Fragment implements
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            // Restore last state for checked position.
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
@@ -141,6 +149,11 @@ public class PaintViewFragment extends Fragment implements
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     // onClick listener

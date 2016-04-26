@@ -23,6 +23,8 @@ import io.github.suzp1984.jbigandroid.widget.SwipeControlViewPager;
 public class MainActivity extends BaseDrawerActivity
         implements MainController.MainControllerUi {
 
+    private final String SELECTED_TAB_INT = "SELECTED_TAB";
+
     @Bind(R.id.viewpager)
     SwipeControlViewPager mViewPager;
 
@@ -45,15 +47,15 @@ public class MainActivity extends BaseDrawerActivity
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.paint_item:
-                                Log.e("TAG", "menu item paint item");
+                                Log.d("TAG", "menu item paint item");
                                 mUiCallback.onTabItemSelected(MainController.TabItem.PAINT_TAB);
                                 break;
                             case R.id.encoder:
-                                Log.e("TAG", "menu item encoder");
+                                Log.d("TAG", "menu item encoder");
                                 mUiCallback.onTabItemSelected(MainController.TabItem.DECODER_TAB);
                                 break;
                             case R.id.about:
-                                Log.e("TAG", "menu item about");
+                                Log.d("TAG", "menu item about");
                                 startAboutLibrary();
                                 break;
                             default:
@@ -88,7 +90,7 @@ public class MainActivity extends BaseDrawerActivity
 
             @Override
             public void onPageSelected(int position) {
-                Log.e("TAG", "Page seleted = " + position);
+                Log.d("TAG", "Page seleted = " + position);
 
                 if (position == 0) {
                     mViewPager.setSwipeable(false);
@@ -103,8 +105,23 @@ public class MainActivity extends BaseDrawerActivity
             }
         });
 
+        if (savedInstanceState != null) {
+            if (mTabLayout.getTabAt(savedInstanceState.getInt(SELECTED_TAB_INT, 0)) != null) {
+                mTabLayout.getTabAt(savedInstanceState.getInt(SELECTED_TAB_INT, 0)).select();
+            }
+        }
+
         if (mTabLayout.getSelectedTabPosition() == 0) {
             mViewPager.setSwipeable(false);
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState (Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            mTabLayout.getTabAt(savedInstanceState.getInt(SELECTED_TAB_INT, 0)).select();
         }
     }
 
@@ -143,6 +160,13 @@ public class MainActivity extends BaseDrawerActivity
         getMainController().detachUi(this);
 
         super.onPause();
+    }
+
+    @Override
+    protected void onSaveInstanceState (Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(SELECTED_TAB_INT, mTabLayout.getSelectedTabPosition());
     }
 
     public void selectPaintTab() {

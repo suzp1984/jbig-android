@@ -43,12 +43,13 @@ public class DecoderFragment extends Fragment implements
 
     public DecoderFragment() {
         // Required empty public constructor
-        ((JbigApplication) getActivity().getApplication()).getApplicationComponent().inject(this);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        ((JbigApplication) getActivity().getApplication()).getApplicationComponent().inject(this);
     }
 
     @Override

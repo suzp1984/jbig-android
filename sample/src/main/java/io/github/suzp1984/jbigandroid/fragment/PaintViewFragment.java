@@ -70,13 +70,13 @@ public class PaintViewFragment extends Fragment implements
 
     public PaintViewFragment() {
         // Required empty public constructor
-        ((JbigApplication)getActivity().getApplication()).getApplicationComponent().inject(this);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
+        ((JbigApplication)getActivity().getApplication()).getApplicationComponent().inject(this);
     }
 
     @Override

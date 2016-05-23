@@ -11,8 +11,9 @@ import android.widget.FrameLayout;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.github.suzp1984.jbigandroid.controller.MainController;
 import io.github.suzp1984.jbigandroid.display.AndroidDisplay;
 import io.github.suzp1984.jbigandroid.display.IDisplay;
@@ -20,11 +21,13 @@ import io.github.suzp1984.jbigandroid.display.IDisplay;
 public abstract class BaseDrawerActivity extends AppCompatActivity {
 
 
-    @Bind(R.id.drawer_layout)
+    @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
 
-    @Bind(R.id.nav_view)
+    @BindView(R.id.nav_view)
     NavigationView mNavigationView;
+
+    private Unbinder mButterUnbinder;
 
     @Inject
     MainController mMainController;
@@ -87,7 +90,9 @@ public abstract class BaseDrawerActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
+        mButterUnbinder.unbind();
+
         super.onDestroy();
 
         mAndroidDisplay = null;
@@ -98,6 +103,6 @@ public abstract class BaseDrawerActivity extends AppCompatActivity {
     }
 
     private void injectView() {
-        ButterKnife.bind(this);
+        mButterUnbinder = ButterKnife.bind(this);
     }
 }

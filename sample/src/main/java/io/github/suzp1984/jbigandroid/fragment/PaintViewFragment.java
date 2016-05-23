@@ -16,9 +16,10 @@ import android.widget.FrameLayout;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import io.github.suzp1984.jbigandroid.JbigApplication;
 import io.github.suzp1984.jbigandroid.R;
 import io.github.suzp1984.jbigandroid.controller.JbigController;
@@ -36,14 +37,15 @@ public class PaintViewFragment extends Fragment implements
     private String mParam2;
 
     private PaintView mPaintView;
+    private Unbinder mButterUnbinder;
 
-    @Bind(R.id.encoder)
+    @BindView(R.id.encoder)
     Button mEncodeBtn;
 
-    @Bind(R.id.clear)
+    @BindView(R.id.clear)
     Button mClearBtn;
 
-    @Bind(R.id.paint_content)
+    @BindView(R.id.paint_content)
     FrameLayout mFrameLayout;
 
     @Inject
@@ -93,7 +95,7 @@ public class PaintViewFragment extends Fragment implements
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_paint_view, container, false);
-        ButterKnife.bind(this, view);
+        mButterUnbinder = ButterKnife.bind(this, view);
 
         mEncodeBtn.setEnabled(false);
         mPaintView = new PaintView(getActivity());
@@ -141,7 +143,7 @@ public class PaintViewFragment extends Fragment implements
 
     @Override
     public void onDestroyView() {
-        ButterKnife.unbind(this);
+        mButterUnbinder.unbind();
 
         super.onDestroyView();
     }

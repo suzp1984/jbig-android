@@ -14,8 +14,9 @@ import android.view.ViewGroup;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.github.suzp1984.jbigandroid.JbigApplication;
 import io.github.suzp1984.jbigandroid.R;
 import io.github.suzp1984.jbigandroid.adapter.ImageAdapter;
@@ -25,11 +26,13 @@ import io.github.suzp1984.jbigandroid.controller.MainController;
 public class DecoderFragment extends Fragment implements
         JbigController.JbigDecoderUi {
 
-    @Bind(R.id.recycler)
+    @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
 
     @Inject
     MainController mMainController;
+
+    private Unbinder mButterUnbinder;
 
     private ImageAdapter mImageAdapter;
 
@@ -63,7 +66,7 @@ public class DecoderFragment extends Fragment implements
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_decoder, container, false);
-        ButterKnife.bind(this, view);
+        mButterUnbinder = ButterKnife.bind(this, view);
 
         mImageAdapter = new ImageAdapter();
 
@@ -99,7 +102,7 @@ public class DecoderFragment extends Fragment implements
 
     @Override
     public void onDestroyView() {
-        ButterKnife.unbind(this);
+        mButterUnbinder.unbind();
 
         super.onDestroyView();
     }

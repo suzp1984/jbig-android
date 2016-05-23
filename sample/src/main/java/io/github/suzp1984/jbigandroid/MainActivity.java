@@ -15,7 +15,9 @@ import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.aboutlibraries.util.Colors;
 
-import butterknife.Bind;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.github.suzp1984.jbigandroid.adapter.FragmentViewAdapter;
 import io.github.suzp1984.jbigandroid.controller.MainController;
 import io.github.suzp1984.jbigandroid.widget.SwipeControlViewPager;
@@ -25,13 +27,13 @@ public class MainActivity extends BaseDrawerActivity
 
     private final String SELECTED_TAB_INT = "SELECTED_TAB";
 
-    @Bind(R.id.viewpager)
+    @BindView(R.id.viewpager)
     SwipeControlViewPager mViewPager;
 
-    @Bind(R.id.tabs)
+    @BindView(R.id.tabs)
     TabLayout mTabLayout;
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
     private MainController.MainControllerUiCallback mUiCallback;
@@ -160,6 +162,12 @@ public class MainActivity extends BaseDrawerActivity
         getMainController().detachUi(this);
 
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
     }
 
     @Override

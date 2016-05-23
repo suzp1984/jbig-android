@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
+apply plugin: 'com.neenbedankt.android-apt'
 
 try {
     apply from: '../../signing.gradle'
@@ -55,7 +56,6 @@ dependencies {
     compile project(':jbig-android-library')
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
-    compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:cardview-v7:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
@@ -66,4 +66,6 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:2.3'
     compile 'com.google.dagger:dagger:2.3'
     provided 'javax.annotation:jsr250-api:1.0'
+    compile 'com.jakewharton:butterknife:8.0.1'
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
 }

@@ -2,9 +2,11 @@ package io.github.suzp1984.jbigandroid;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.StrictMode;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
 import io.github.suzp1984.jbigandroid.controller.MainController;
 import io.github.suzp1984.jbigandroid.injector.component.ApplicationComponent;
 import io.github.suzp1984.jbigandroid.injector.component.DaggerApplicationComponent;
@@ -27,8 +29,22 @@ public class JbigApplication extends Application {
 
     @Override
     public void onCreate() {
-        super.onCreate();
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                        .detectAll()
+                        .penaltyLog()
+                        .penaltyDialog()
+                        .build());
 
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                        .detectAll()
+                        .penaltyLog()
+                        .build());
+
+            ButterKnife.setDebug(true);
+        }
+
+        super.onCreate();
     }
 
     public ApplicationComponent getApplicationComponent() {

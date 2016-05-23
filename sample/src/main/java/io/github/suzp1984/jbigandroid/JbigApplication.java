@@ -4,10 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.StrictMode;
 
-import javax.inject.Inject;
-
 import butterknife.ButterKnife;
-import io.github.suzp1984.jbigandroid.controller.MainController;
 import io.github.suzp1984.jbigandroid.injector.component.ApplicationComponent;
 import io.github.suzp1984.jbigandroid.injector.component.DaggerApplicationComponent;
 import io.github.suzp1984.jbigandroid.injector.module.ApplicationModule;

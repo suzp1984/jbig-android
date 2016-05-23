@@ -16,8 +16,6 @@ import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.aboutlibraries.util.Colors;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import io.github.suzp1984.jbigandroid.adapter.FragmentViewAdapter;
 import io.github.suzp1984.jbigandroid.controller.MainController;
 import io.github.suzp1984.jbigandroid.widget.SwipeControlViewPager;

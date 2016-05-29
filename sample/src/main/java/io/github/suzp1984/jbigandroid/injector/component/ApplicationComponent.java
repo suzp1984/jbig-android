@@ -14,6 +14,7 @@ import io.github.suzp1984.jbigandroid.injector.module.ApplicationModule;
 import io.github.suzp1984.jbigandroid.injector.module.PersistenceModule;
 import io.github.suzp1984.jbigandroid.injector.module.StateModule;
 import io.github.suzp1984.jbigandroid.injector.module.UtilsModule;
+import io.github.suzp1984.jbigandroid.provider.JbigContentProvider;
 
 /**
  * Created by jacobsu on 4/24/16.

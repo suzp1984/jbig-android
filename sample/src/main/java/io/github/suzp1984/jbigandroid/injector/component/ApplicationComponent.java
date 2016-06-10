@@ -28,6 +28,7 @@ public interface ApplicationComponent {
     void inject(BaseDrawerActivity activity);
     void inject(DecoderFragment fragment);
     void inject(PaintViewFragment fragment);
+    void inject(JbigContentProvider provider);
 
     MainController getMainController();
 }

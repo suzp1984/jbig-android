@@ -1,1 +1,1 @@
-include ':mvc-sample', ':jbig-android-library'
+include ':mvc-sample', ':jbig-android-library', ':agera-sample'

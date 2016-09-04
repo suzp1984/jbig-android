@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/paint_item"
+            android:icon="@drawable/ic_menu"
+            android:title="Paint"
+            />
+        <item
+            android:id="@+id/encoder"
+            android:icon="@drawable/ic_menu"
+            android:title="Encoder"
+            />
+    </group>
+
+    <item android:title="About">
+        <menu>
+            <item
+                android:id="@+id/about"
+                android:icon="@drawable/ic_about"
+                android:title="About"/>
+        </menu>
+    </item>
+</menu>

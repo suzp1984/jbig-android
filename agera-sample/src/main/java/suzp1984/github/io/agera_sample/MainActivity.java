@@ -1,9 +1,8 @@
 package suzp1984.github.io.agera_sample;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

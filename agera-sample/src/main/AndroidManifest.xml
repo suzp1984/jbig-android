@@ -3,6 +3,7 @@
     package="suzp1984.github.io.agera_sample">
 
     <application
+        android:name=".JbigApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

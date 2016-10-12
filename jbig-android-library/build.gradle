@@ -11,21 +11,20 @@ try {
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    buildToolsVersion '24.0.3'
     archivesBaseName = "jbig-android"
     defaultConfig {
-        minSdkVersion 10
+        minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
-        ndk {
-            moduleName "jbigkit"
-            ldLibs "log", "jnigraphics"
-        }
+//        ndk {
+//            moduleName "jbigkit"
+//            ldLibs "log", "jnigraphics"
+//        }
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
             try {
@@ -38,7 +37,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     libraryVariants.all { variant ->
         variant.outputs.each { output ->
             def outputFile = output.outputFile
@@ -48,18 +46,24 @@ android {
             }
         }
     }
+    externalNativeBuild {
+        ndkBuild {
+            path 'src/main/jni/Android.mk'
+        }
+    }
+    productFlavors {
+    }
 }
 
 apply from: './bintray_upload.gradle'
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.0'
-
+    compile 'com.android.support:appcompat-v7:24.2.1'
     // Optional -- Mockito framework
     testCompile 'org.mockito:mockito-core:1.10.19'
-    androidTestCompile 'com.android.support:support-annotations:24.2.0'
+    androidTestCompile 'com.android.support:support-annotations:24.2.1'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
     // Optional -- Hamcrest library

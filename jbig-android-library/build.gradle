@@ -18,10 +18,15 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
-//        ndk {
-//            moduleName "jbigkit"
-//            ldLibs "log", "jnigraphics"
-//        }
+
+        externalNativeBuild {
+            ndkBuild {
+                // cFlags cppFlags
+            }
+            cmake {
+                
+            }
+        }
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -47,8 +52,11 @@ android {
         }
     }
     externalNativeBuild {
-        ndkBuild {
-            path 'src/main/jni/Android.mk'
+//        ndkBuild {
+//            path 'src/main/jni/Android.mk'
+//        }
+        cmake {
+            path 'CMakeLists.txt'
         }
     }
     productFlavors {

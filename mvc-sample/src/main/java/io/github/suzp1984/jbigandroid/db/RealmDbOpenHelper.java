@@ -33,7 +33,7 @@ public class RealmDbOpenHelper implements DataBaseHelper {
         RealmResults<JbigItem> results = query.findAll();
 
         for (JbigItem item : results) {
-            ret.add(item.getJbig());
+            ret.add(item.jbig);
         }
 
         return ret;
@@ -47,7 +47,7 @@ public class RealmDbOpenHelper implements DataBaseHelper {
         JbigItem item = results.get(position);
 
         if (item != null) {
-            return item.getJbig();
+            return item.jbig;
         }
 
         return null;
@@ -60,8 +60,8 @@ public class RealmDbOpenHelper implements DataBaseHelper {
         mRealm.beginTransaction();
 
         JbigItem item = mRealm.createObject(JbigItem.class);
-        item.setTag("PaintView");
-        item.setJbig(jbig);
+        item.tag = "PaintView";
+        item.jbig = jbig;
 
         mRealm.commitTransaction();
     }
@@ -79,9 +79,9 @@ public class RealmDbOpenHelper implements DataBaseHelper {
         RealmResults<JbigItem> results = query.findAll();
 
         for (JbigItem item : results) {
-            if (item.getJbig() == jbig) {
+            if (item.jbig == jbig) {
                 mRealm.beginTransaction();
-                item.removeFromRealm();
+                item.deleteFromRealm();
                 mRealm.commitTransaction();
                 break;
             }

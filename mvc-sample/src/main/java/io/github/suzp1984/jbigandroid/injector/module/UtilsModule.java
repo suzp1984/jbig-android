@@ -19,8 +19,9 @@ import io.realm.RealmConfiguration;
 public class UtilsModule {
     public UtilsModule(Context context) {
         Preconditions.checkNotNull(context, "context cannot be null");
-        RealmConfiguration config = new RealmConfiguration.Builder(context).build();
-        Realm.setDefaultConfiguration(config);
+        Realm.init(context);
+//        RealmConfiguration config = new RealmConfiguration.Builder().build();
+//        Realm.setDefaultConfiguration(config);
     }
 
     @Provides

@@ -11,7 +11,7 @@ try {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    buildToolsVersion '25.0.3'
     archivesBaseName = "jbig-android"
     defaultConfig {
         minSdkVersion 16

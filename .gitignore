@@ -36,3 +36,4 @@ proguard/
 .idea/
 
 jbig-android-library/.externalNativeBuild/
+reports/

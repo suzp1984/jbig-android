@@ -1,8 +1,8 @@
 package io.github.suzp1984.jbigandroid.adapter;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import io.github.suzp1984.jbigandroid.fragment.DecoderFragment;
 import io.github.suzp1984.jbigandroid.fragment.PaintViewFragment;
@@ -22,10 +22,10 @@ public class FragmentViewAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case 0:
-                fragment = PaintViewFragment.newInstance(null, null);
+                fragment = new PaintViewFragment();
                 break;
             case 1:
-                fragment = DecoderFragment.newInstance();
+                fragment = new DecoderFragment();
                 break;
             default:
                 break;

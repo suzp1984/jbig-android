@@ -3,20 +3,18 @@ package io.github.suzp1984.jbigandroid.fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import io.github.suzp1984.jbigandroid.JbigApplication;
 import io.github.suzp1984.jbigandroid.R;
 import io.github.suzp1984.jbigandroid.adapter.ImageAdapter;
@@ -26,23 +24,14 @@ import io.github.suzp1984.jbigandroid.controller.MainController;
 public class DecoderFragment extends Fragment implements
         JbigController.JbigDecoderUi {
 
-    @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
 
     @Inject
     MainController mMainController;
 
-    private Unbinder mButterUnbinder;
-
     private ImageAdapter mImageAdapter;
 
     private JbigController.JbigUiCallback mJbigUiCallback;
-
-    public static DecoderFragment newInstance() {
-        DecoderFragment fragment = new DecoderFragment();
-
-        return fragment;
-    }
 
     public DecoderFragment() {
         // Required empty public constructor
@@ -66,8 +55,8 @@ public class DecoderFragment extends Fragment implements
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_decoder, container, false);
-        mButterUnbinder = ButterKnife.bind(this, view);
 
+        mRecyclerView = view.findViewById(R.id.recycler);
         mImageAdapter = new ImageAdapter();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -98,13 +87,6 @@ public class DecoderFragment extends Fragment implements
         getController().detachUi(this);
 
         super.onPause();
-    }
-
-    @Override
-    public void onDestroyView() {
-        mButterUnbinder.unbind();
-
-        super.onDestroyView();
     }
 
     @Override

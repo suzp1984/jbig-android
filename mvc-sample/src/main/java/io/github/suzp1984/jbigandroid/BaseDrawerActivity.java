@@ -1,33 +1,27 @@
 package io.github.suzp1984.jbigandroid;
 
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
+
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import io.github.suzp1984.jbigandroid.controller.MainController;
 import io.github.suzp1984.jbigandroid.display.AndroidDisplay;
 import io.github.suzp1984.jbigandroid.display.IDisplay;
 
 public abstract class BaseDrawerActivity extends AppCompatActivity {
 
-
-    @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
 
-    @BindView(R.id.nav_view)
     NavigationView mNavigationView;
-
-    private Unbinder mButterUnbinder;
 
     @Inject
     MainController mMainController;
@@ -39,7 +33,8 @@ public abstract class BaseDrawerActivity extends AppCompatActivity {
         FrameLayout parent = (FrameLayout) findViewById(R.id.content);
         LayoutInflater.from(this).inflate(layoutId, parent, true);
 
-        injectView();
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mNavigationView = findViewById(R.id.nav_view);
 
         mAndroidDisplay = new AndroidDisplay(this, mDrawerLayout);
     }
@@ -91,8 +86,6 @@ public abstract class BaseDrawerActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        mButterUnbinder.unbind();
-
         super.onDestroy();
 
         mAndroidDisplay = null;
@@ -102,7 +95,4 @@ public abstract class BaseDrawerActivity extends AppCompatActivity {
         return mMainController;
     }
 
-    private void injectView() {
-        mButterUnbinder = ButterKnife.bind(this);
-    }
 }

@@ -3,8 +3,6 @@ package io.github.suzp1984.jbigandroid.fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,12 +12,11 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 import io.github.suzp1984.jbigandroid.JbigApplication;
 import io.github.suzp1984.jbigandroid.R;
 import io.github.suzp1984.jbigandroid.controller.JbigController;
@@ -30,45 +27,18 @@ public class PaintViewFragment extends Fragment implements
         EncoderDialogFragment.EncodeDialogListener,
         JbigController.JbigEncoderUi {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
     private PaintView mPaintView;
-    private Unbinder mButterUnbinder;
 
-    @BindView(R.id.encoder)
     Button mEncodeBtn;
 
-    @BindView(R.id.clear)
     Button mClearBtn;
 
-    @BindView(R.id.paint_content)
     FrameLayout mFrameLayout;
 
     @Inject
     MainController mMainController;
 
     private JbigController.JbigUiCallback mJbigUiCallback;
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PaintViewFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PaintViewFragment newInstance(String param1, String param2) {
-        PaintViewFragment fragment = new PaintViewFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     public PaintViewFragment() {
         // Required empty public constructor
@@ -82,20 +52,29 @@ public class PaintViewFragment extends Fragment implements
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_paint_view, container, false);
-        mButterUnbinder = ButterKnife.bind(this, view);
+
+        mEncodeBtn = view.findViewById(R.id.encoder);
+        mClearBtn = view.findViewById(R.id.clear);
+        mFrameLayout = view.findViewById(R.id.paint_content);
+
+        mEncodeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onEncodeClicked();
+            }
+        });
+
+
+        mClearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClearBtnClicked();
+            }
+        });
 
         mEncodeBtn.setEnabled(false);
         mPaintView = new PaintView(getActivity());
@@ -142,13 +121,6 @@ public class PaintViewFragment extends Fragment implements
     }
 
     @Override
-    public void onDestroyView() {
-        mButterUnbinder.unbind();
-
-        super.onDestroyView();
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
     }
@@ -159,14 +131,12 @@ public class PaintViewFragment extends Fragment implements
     }
 
     // onClick listener
-    @OnClick(R.id.encoder)
     public void onEncodeClicked() {
         //TODO:XXX pop up a dialog, clean the PaintView.
 
         showEncodeDialog();
     }
 
-    @OnClick(R.id.clear)
     public void onClearBtnClicked() {
         mPaintView.clear();
         mEncodeBtn.setEnabled(false);

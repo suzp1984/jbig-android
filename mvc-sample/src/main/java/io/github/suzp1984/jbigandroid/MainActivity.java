@@ -1,21 +1,21 @@
 package io.github.suzp1984.jbigandroid;
 
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.aboutlibraries.util.Colors;
 
-import butterknife.BindView;
 import io.github.suzp1984.jbigandroid.adapter.FragmentViewAdapter;
 import io.github.suzp1984.jbigandroid.controller.MainController;
 import io.github.suzp1984.jbigandroid.widget.SwipeControlViewPager;
@@ -25,13 +25,10 @@ public class MainActivity extends BaseDrawerActivity
 
     private final String SELECTED_TAB_INT = "SELECTED_TAB";
 
-    @BindView(R.id.viewpager)
     SwipeControlViewPager mViewPager;
 
-    @BindView(R.id.tabs)
     TabLayout mTabLayout;
 
-    @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
     private MainController.MainControllerUiCallback mUiCallback;
@@ -40,6 +37,10 @@ public class MainActivity extends BaseDrawerActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewpage_sample);
+
+        mViewPager = findViewById(R.id.viewpager);
+        mTabLayout = findViewById(R.id.tabs);
+        mToolbar = findViewById(R.id.toolbar);
 
         mNavigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {

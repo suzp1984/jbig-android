@@ -1,8 +1,8 @@
 package io.github.suzp1984.jbigandroid.display;
 
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import io.github.suzp1984.jbigandroid.MainActivity;
 

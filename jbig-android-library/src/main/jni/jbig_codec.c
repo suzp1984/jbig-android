@@ -184,7 +184,8 @@ static jobject decode_jbig_plane(JNIEnv* env, unsigned char* p, unsigned long si
     }
 
     argb8888_pixels_jarray = (*env)->NewIntArray(env, argb8888_pixels_size);
-    (*env)->SetIntArrayRegion(env, argb8888_pixels_jarray, 0, argb8888_pixels_size, argb8888_pixels);
+    (*env)->SetIntArrayRegion(env, argb8888_pixels_jarray, 0, argb8888_pixels_size,
+                              (const jint *) argb8888_pixels);
     bitmap = (*env)->CallStaticObjectMethod(env, bmpCls, createBmpMd, argb8888_pixels_jarray, w, h, jBmpCfg);
 
     safe_free(argb8888_pixels);
@@ -297,8 +298,8 @@ jobjectArray Java_io_github_suzp1984_jbig_JniJbigCodec_decodeNative(JNIEnv* env,
     jobjectArray bitmaps_array;
     jclass bitmapCls = (*env)->FindClass(env, "android/graphics/Bitmap");
 
-    buffer = (*env)->GetByteArrayElements(env, data, NULL);
-    buf_len = (*env)->GetArrayLength(env, data);
+    buffer = (unsigned char *) (*env)->GetByteArrayElements(env, data, NULL);
+    buf_len = (uint32_t) (*env)->GetArrayLength(env, data);
 
     jbg_dec_init(&s);
     jbg_dec_maxsize(&s, xmax, ymax);

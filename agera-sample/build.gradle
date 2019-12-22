@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "suzp1984.github.io.agera_sample"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 

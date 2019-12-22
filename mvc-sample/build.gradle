@@ -14,11 +14,11 @@ android {
     dexOptions {
         // incremental false
     }
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "io.github.suzp1984.jbigandroid"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 2
         versionName "2.0"
 

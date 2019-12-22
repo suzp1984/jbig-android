@@ -1,12 +1,10 @@
 package suzp1984.github.io.agera_sample;
 
 import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
